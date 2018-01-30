@@ -1,0 +1,557 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1326D9742020C3A9007BB83A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1326D9732020C3A9007BB83A /* AppDelegate.swift */; };
+		1326D9762020C3A9007BB83A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1326D9752020C3A9007BB83A /* ViewController.swift */; };
+		1326D9792020C3A9007BB83A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1326D9772020C3A9007BB83A /* Main.storyboard */; };
+		1326D97B2020C3A9007BB83A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1326D97A2020C3A9007BB83A /* Assets.xcassets */; };
+		1326D97E2020C3A9007BB83A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1326D97C2020C3A9007BB83A /* LaunchScreen.storyboard */; };
+		1326D9892020C3AA007BB83A /* KalappTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1326D9882020C3AA007BB83A /* KalappTests.swift */; };
+		1326D9942020C3AA007BB83A /* KalappUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1326D9932020C3AA007BB83A /* KalappUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1326D9852020C3AA007BB83A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1326D9682020C3A9007BB83A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1326D96F2020C3A9007BB83A;
+			remoteInfo = Kalapp;
+		};
+		1326D9902020C3AA007BB83A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1326D9682020C3A9007BB83A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1326D96F2020C3A9007BB83A;
+			remoteInfo = Kalapp;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1326D9702020C3A9007BB83A /* Kalapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kalapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1326D9732020C3A9007BB83A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		1326D9752020C3A9007BB83A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		1326D9782020C3A9007BB83A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		1326D97A2020C3A9007BB83A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1326D97D2020C3A9007BB83A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		1326D97F2020C3A9007BB83A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1326D9842020C3AA007BB83A /* KalappTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KalappTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1326D9882020C3AA007BB83A /* KalappTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KalappTests.swift; sourceTree = "<group>"; };
+		1326D98A2020C3AA007BB83A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1326D98F2020C3AA007BB83A /* KalappUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KalappUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1326D9932020C3AA007BB83A /* KalappUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KalappUITests.swift; sourceTree = "<group>"; };
+		1326D9952020C3AA007BB83A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1326D96D2020C3A9007BB83A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1326D9812020C3AA007BB83A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1326D98C2020C3AA007BB83A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1326D9672020C3A9007BB83A = {
+			isa = PBXGroup;
+			children = (
+				1326D9722020C3A9007BB83A /* Kalapp */,
+				1326D9872020C3AA007BB83A /* KalappTests */,
+				1326D9922020C3AA007BB83A /* KalappUITests */,
+				1326D9712020C3A9007BB83A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1326D9712020C3A9007BB83A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1326D9702020C3A9007BB83A /* Kalapp.app */,
+				1326D9842020C3AA007BB83A /* KalappTests.xctest */,
+				1326D98F2020C3AA007BB83A /* KalappUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1326D9722020C3A9007BB83A /* Kalapp */ = {
+			isa = PBXGroup;
+			children = (
+				1326D9732020C3A9007BB83A /* AppDelegate.swift */,
+				1326D9752020C3A9007BB83A /* ViewController.swift */,
+				1326D9772020C3A9007BB83A /* Main.storyboard */,
+				1326D97A2020C3A9007BB83A /* Assets.xcassets */,
+				1326D97C2020C3A9007BB83A /* LaunchScreen.storyboard */,
+				1326D97F2020C3A9007BB83A /* Info.plist */,
+			);
+			path = Kalapp;
+			sourceTree = "<group>";
+		};
+		1326D9872020C3AA007BB83A /* KalappTests */ = {
+			isa = PBXGroup;
+			children = (
+				1326D9882020C3AA007BB83A /* KalappTests.swift */,
+				1326D98A2020C3AA007BB83A /* Info.plist */,
+			);
+			path = KalappTests;
+			sourceTree = "<group>";
+		};
+		1326D9922020C3AA007BB83A /* KalappUITests */ = {
+			isa = PBXGroup;
+			children = (
+				1326D9932020C3AA007BB83A /* KalappUITests.swift */,
+				1326D9952020C3AA007BB83A /* Info.plist */,
+			);
+			path = KalappUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1326D96F2020C3A9007BB83A /* Kalapp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1326D9982020C3AA007BB83A /* Build configuration list for PBXNativeTarget "Kalapp" */;
+			buildPhases = (
+				1326D96C2020C3A9007BB83A /* Sources */,
+				1326D96D2020C3A9007BB83A /* Frameworks */,
+				1326D96E2020C3A9007BB83A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Kalapp;
+			productName = Kalapp;
+			productReference = 1326D9702020C3A9007BB83A /* Kalapp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		1326D9832020C3AA007BB83A /* KalappTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1326D99B2020C3AA007BB83A /* Build configuration list for PBXNativeTarget "KalappTests" */;
+			buildPhases = (
+				1326D9802020C3AA007BB83A /* Sources */,
+				1326D9812020C3AA007BB83A /* Frameworks */,
+				1326D9822020C3AA007BB83A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1326D9862020C3AA007BB83A /* PBXTargetDependency */,
+			);
+			name = KalappTests;
+			productName = KalappTests;
+			productReference = 1326D9842020C3AA007BB83A /* KalappTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		1326D98E2020C3AA007BB83A /* KalappUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1326D99E2020C3AA007BB83A /* Build configuration list for PBXNativeTarget "KalappUITests" */;
+			buildPhases = (
+				1326D98B2020C3AA007BB83A /* Sources */,
+				1326D98C2020C3AA007BB83A /* Frameworks */,
+				1326D98D2020C3AA007BB83A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1326D9912020C3AA007BB83A /* PBXTargetDependency */,
+			);
+			name = KalappUITests;
+			productName = KalappUITests;
+			productReference = 1326D98F2020C3AA007BB83A /* KalappUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1326D9682020C3A9007BB83A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0920;
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = "KalÖM";
+				TargetAttributes = {
+					1326D96F2020C3A9007BB83A = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+					1326D9832020C3AA007BB83A = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 1326D96F2020C3A9007BB83A;
+					};
+					1326D98E2020C3AA007BB83A = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 1326D96F2020C3A9007BB83A;
+					};
+				};
+			};
+			buildConfigurationList = 1326D96B2020C3A9007BB83A /* Build configuration list for PBXProject "Kalapp" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1326D9672020C3A9007BB83A;
+			productRefGroup = 1326D9712020C3A9007BB83A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1326D96F2020C3A9007BB83A /* Kalapp */,
+				1326D9832020C3AA007BB83A /* KalappTests */,
+				1326D98E2020C3AA007BB83A /* KalappUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1326D96E2020C3A9007BB83A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1326D97E2020C3A9007BB83A /* LaunchScreen.storyboard in Resources */,
+				1326D97B2020C3A9007BB83A /* Assets.xcassets in Resources */,
+				1326D9792020C3A9007BB83A /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1326D9822020C3AA007BB83A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1326D98D2020C3AA007BB83A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1326D96C2020C3A9007BB83A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1326D9762020C3A9007BB83A /* ViewController.swift in Sources */,
+				1326D9742020C3A9007BB83A /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1326D9802020C3AA007BB83A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1326D9892020C3AA007BB83A /* KalappTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1326D98B2020C3AA007BB83A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1326D9942020C3AA007BB83A /* KalappUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1326D9862020C3AA007BB83A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1326D96F2020C3A9007BB83A /* Kalapp */;
+			targetProxy = 1326D9852020C3AA007BB83A /* PBXContainerItemProxy */;
+		};
+		1326D9912020C3AA007BB83A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1326D96F2020C3A9007BB83A /* Kalapp */;
+			targetProxy = 1326D9902020C3AA007BB83A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		1326D9772020C3A9007BB83A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1326D9782020C3A9007BB83A /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		1326D97C2020C3A9007BB83A /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1326D97D2020C3A9007BB83A /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1326D9962020C3AA007BB83A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		1326D9972020C3AA007BB83A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1326D9992020C3AA007BB83A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = Kalapp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.kalom.Kalapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1326D99A2020C3AA007BB83A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = Kalapp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.kalom.Kalapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		1326D99C2020C3AA007BB83A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = KalappTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.kalom.KalappTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kalapp.app/Kalapp";
+			};
+			name = Debug;
+		};
+		1326D99D2020C3AA007BB83A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = KalappTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.kalom.KalappTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kalapp.app/Kalapp";
+			};
+			name = Release;
+		};
+		1326D99F2020C3AA007BB83A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = KalappUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.kalom.KalappUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Kalapp;
+			};
+			name = Debug;
+		};
+		1326D9A02020C3AA007BB83A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = KalappUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.kalom.KalappUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Kalapp;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1326D96B2020C3A9007BB83A /* Build configuration list for PBXProject "Kalapp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1326D9962020C3AA007BB83A /* Debug */,
+				1326D9972020C3AA007BB83A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1326D9982020C3AA007BB83A /* Build configuration list for PBXNativeTarget "Kalapp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1326D9992020C3AA007BB83A /* Debug */,
+				1326D99A2020C3AA007BB83A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1326D99B2020C3AA007BB83A /* Build configuration list for PBXNativeTarget "KalappTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1326D99C2020C3AA007BB83A /* Debug */,
+				1326D99D2020C3AA007BB83A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1326D99E2020C3AA007BB83A /* Build configuration list for PBXNativeTarget "KalappUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1326D99F2020C3AA007BB83A /* Debug */,
+				1326D9A02020C3AA007BB83A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1326D9682020C3A9007BB83A /* Project object */;
+}
