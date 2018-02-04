@@ -8,12 +8,27 @@
 
 /* Begin PBXBuildFile section */
 		1326D9742020C3A9007BB83A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1326D9732020C3A9007BB83A /* AppDelegate.swift */; };
-		1326D9762020C3A9007BB83A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1326D9752020C3A9007BB83A /* ViewController.swift */; };
+		1326D9762020C3A9007BB83A /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1326D9752020C3A9007BB83A /* MainPageViewController.swift */; };
 		1326D9792020C3A9007BB83A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1326D9772020C3A9007BB83A /* Main.storyboard */; };
 		1326D97B2020C3A9007BB83A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1326D97A2020C3A9007BB83A /* Assets.xcassets */; };
 		1326D97E2020C3A9007BB83A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1326D97C2020C3A9007BB83A /* LaunchScreen.storyboard */; };
 		1326D9892020C3AA007BB83A /* KalappTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1326D9882020C3AA007BB83A /* KalappTests.swift */; };
 		1326D9942020C3AA007BB83A /* KalappUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1326D9932020C3AA007BB83A /* KalappUITests.swift */; };
+		1326D9A52020C41D007BB83A /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1326D97F2020C3A9007BB83A /* Info.plist */; };
+		1341ECF720249C8F0013B615 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1341ECF620249C8F0013B615 /* LoginViewController.swift */; };
+		1393F56D20265F910072303B /* UserDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1393F56C20265F910072303B /* UserDetails.swift */; };
+		1393F56F202672E00072303B /* Anket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1393F56E202672E00072303B /* Anket.swift */; };
+		13D7EB5C2021EF3300B4470C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D7EB5B2021EF3300B4470C /* ProfileViewController.swift */; };
+		13D7EB5E2021EFAB00B4470C /* AnketlerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D7EB5D2021EFAB00B4470C /* AnketlerViewController.swift */; };
+		13D7EB602021EFB800B4470C /* AnketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D7EB5F2021EFB800B4470C /* AnketViewController.swift */; };
+		13D7EB622021EFC800B4470C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D7EB612021EFC800B4470C /* SettingsViewController.swift */; };
+		13D7EB642021F5ED00B4470C /* Duyuru.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D7EB632021F5ED00B4470C /* Duyuru.swift */; };
+		13D7EB672021FF7D00B4470C /* DuyuruTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D7EB652021FF7D00B4470C /* DuyuruTableViewCell.swift */; };
+		13F093E32025143600D1C331 /* DuyuruTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13F093E22025143600D1C331 /* DuyuruTableViewCell.xib */; };
+		13FCA71B2023816B001AFB3B /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FCA71A2023816B001AFB3B /* Network.swift */; };
+		BF17E45FCFAD005003FD986D /* Pods_KalappUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FA1582E8012312C825938AF /* Pods_KalappUITests.framework */; };
+		D84C9E987DE5958097F58B42 /* Pods_Kalapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F445673C377B151FEF4DCF7 /* Pods_Kalapp.framework */; };
+		E2413F2EAF562B47443EBD02 /* Pods_KalappTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93ADDB80498DB4D8F9E51F0A /* Pods_KalappTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,9 +49,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		00798345629C18D3B338AB7C /* Pods-Kalapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kalapp.release.xcconfig"; path = "Pods/Target Support Files/Pods-Kalapp/Pods-Kalapp.release.xcconfig"; sourceTree = "<group>"; };
 		1326D9702020C3A9007BB83A /* Kalapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kalapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1326D9732020C3A9007BB83A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1326D9752020C3A9007BB83A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		1326D9752020C3A9007BB83A /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
 		1326D9782020C3A9007BB83A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1326D97A2020C3A9007BB83A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1326D97D2020C3A9007BB83A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +63,25 @@
 		1326D98F2020C3AA007BB83A /* KalappUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KalappUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1326D9932020C3AA007BB83A /* KalappUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KalappUITests.swift; sourceTree = "<group>"; };
 		1326D9952020C3AA007BB83A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1341ECF620249C8F0013B615 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		1393F56C20265F910072303B /* UserDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetails.swift; sourceTree = "<group>"; };
+		1393F56E202672E00072303B /* Anket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Anket.swift; sourceTree = "<group>"; };
+		13D7EB5B2021EF3300B4470C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		13D7EB5D2021EFAB00B4470C /* AnketlerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnketlerViewController.swift; sourceTree = "<group>"; };
+		13D7EB5F2021EFB800B4470C /* AnketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnketViewController.swift; sourceTree = "<group>"; };
+		13D7EB612021EFC800B4470C /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		13D7EB632021F5ED00B4470C /* Duyuru.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Duyuru.swift; sourceTree = "<group>"; };
+		13D7EB652021FF7D00B4470C /* DuyuruTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuyuruTableViewCell.swift; sourceTree = "<group>"; };
+		13F093E22025143600D1C331 /* DuyuruTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DuyuruTableViewCell.xib; sourceTree = "<group>"; };
+		13FCA71A2023816B001AFB3B /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		4BDAFC78226F57FD732BB6F2 /* Pods-KalappUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KalappUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KalappUITests/Pods-KalappUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		52C6559EE9E3119000C1BCD9 /* Pods-Kalapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kalapp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kalapp/Pods-Kalapp.debug.xcconfig"; sourceTree = "<group>"; };
+		5F445673C377B151FEF4DCF7 /* Pods_Kalapp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kalapp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5FA1582E8012312C825938AF /* Pods_KalappUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KalappUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		69A28D10C54A3A2811DF85DC /* Pods-KalappUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KalappUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-KalappUITests/Pods-KalappUITests.release.xcconfig"; sourceTree = "<group>"; };
+		93ADDB80498DB4D8F9E51F0A /* Pods_KalappTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KalappTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C5341F358108093BE9138777 /* Pods-KalappTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KalappTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-KalappTests/Pods-KalappTests.release.xcconfig"; sourceTree = "<group>"; };
+		EF23FBFCEFC30846220F7E85 /* Pods-KalappTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KalappTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KalappTests/Pods-KalappTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D84C9E987DE5958097F58B42 /* Pods_Kalapp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2413F2EAF562B47443EBD02 /* Pods_KalappTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +105,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF17E45FCFAD005003FD986D /* Pods_KalappUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +119,8 @@
 				1326D9872020C3AA007BB83A /* KalappTests */,
 				1326D9922020C3AA007BB83A /* KalappUITests */,
 				1326D9712020C3A9007BB83A /* Products */,
+				1A59C6E5AAAC54AEC4BB7048 /* Pods */,
+				2453014757A41061AAC029B2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -97,12 +137,10 @@
 		1326D9722020C3A9007BB83A /* Kalapp */ = {
 			isa = PBXGroup;
 			children = (
-				1326D9732020C3A9007BB83A /* AppDelegate.swift */,
-				1326D9752020C3A9007BB83A /* ViewController.swift */,
-				1326D9772020C3A9007BB83A /* Main.storyboard */,
-				1326D97A2020C3A9007BB83A /* Assets.xcassets */,
-				1326D97C2020C3A9007BB83A /* LaunchScreen.storyboard */,
-				1326D97F2020C3A9007BB83A /* Info.plist */,
+				1326D9A82020C478007BB83A /* Model */,
+				1326D9A32020C3DA007BB83A /* View */,
+				1326D9A22020C3CB007BB83A /* Controller */,
+				1326D9A42020C3E0007BB83A /* Supporting Files */,
 			);
 			path = Kalapp;
 			sourceTree = "<group>";
@@ -125,6 +163,84 @@
 			path = KalappUITests;
 			sourceTree = "<group>";
 		};
+		1326D9A22020C3CB007BB83A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1326D9732020C3A9007BB83A /* AppDelegate.swift */,
+				1326D9752020C3A9007BB83A /* MainPageViewController.swift */,
+				13D7EB5B2021EF3300B4470C /* ProfileViewController.swift */,
+				13D7EB5D2021EFAB00B4470C /* AnketlerViewController.swift */,
+				13D7EB5F2021EFB800B4470C /* AnketViewController.swift */,
+				13D7EB612021EFC800B4470C /* SettingsViewController.swift */,
+				1341ECF620249C8F0013B615 /* LoginViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		1326D9A32020C3DA007BB83A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				13D7EB5A2021E99900B4470C /* Custom Cells */,
+				1326D9772020C3A9007BB83A /* Main.storyboard */,
+				1326D97A2020C3A9007BB83A /* Assets.xcassets */,
+				1326D97C2020C3A9007BB83A /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1326D9A42020C3E0007BB83A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1326D97F2020C3A9007BB83A /* Info.plist */,
+			);
+			name = "Supporting Files";
+			path = "Supporting Fİles";
+			sourceTree = "<group>";
+		};
+		1326D9A82020C478007BB83A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				13D7EB632021F5ED00B4470C /* Duyuru.swift */,
+				13FCA71A2023816B001AFB3B /* Network.swift */,
+				1393F56C20265F910072303B /* UserDetails.swift */,
+				1393F56E202672E00072303B /* Anket.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		13D7EB5A2021E99900B4470C /* Custom Cells */ = {
+			isa = PBXGroup;
+			children = (
+				13D7EB652021FF7D00B4470C /* DuyuruTableViewCell.swift */,
+				13F093E22025143600D1C331 /* DuyuruTableViewCell.xib */,
+			);
+			name = "Custom Cells";
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		1A59C6E5AAAC54AEC4BB7048 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				52C6559EE9E3119000C1BCD9 /* Pods-Kalapp.debug.xcconfig */,
+				00798345629C18D3B338AB7C /* Pods-Kalapp.release.xcconfig */,
+				EF23FBFCEFC30846220F7E85 /* Pods-KalappTests.debug.xcconfig */,
+				C5341F358108093BE9138777 /* Pods-KalappTests.release.xcconfig */,
+				4BDAFC78226F57FD732BB6F2 /* Pods-KalappUITests.debug.xcconfig */,
+				69A28D10C54A3A2811DF85DC /* Pods-KalappUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		2453014757A41061AAC029B2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5F445673C377B151FEF4DCF7 /* Pods_Kalapp.framework */,
+				93ADDB80498DB4D8F9E51F0A /* Pods_KalappTests.framework */,
+				5FA1582E8012312C825938AF /* Pods_KalappUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -132,9 +248,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1326D9982020C3AA007BB83A /* Build configuration list for PBXNativeTarget "Kalapp" */;
 			buildPhases = (
+				464A95034E69D06EDB03CB15 /* [CP] Check Pods Manifest.lock */,
 				1326D96C2020C3A9007BB83A /* Sources */,
 				1326D96D2020C3A9007BB83A /* Frameworks */,
 				1326D96E2020C3A9007BB83A /* Resources */,
+				38BBBF78217899D6DFF85C80 /* [CP] Embed Pods Frameworks */,
+				F828EFC85510713D7D34A660 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -149,9 +268,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1326D99B2020C3AA007BB83A /* Build configuration list for PBXNativeTarget "KalappTests" */;
 			buildPhases = (
+				F39C29832CE2446037113607 /* [CP] Check Pods Manifest.lock */,
 				1326D9802020C3AA007BB83A /* Sources */,
 				1326D9812020C3AA007BB83A /* Frameworks */,
 				1326D9822020C3AA007BB83A /* Resources */,
+				07E73ECB5E764C747B690CE6 /* [CP] Embed Pods Frameworks */,
+				98DD05904D7ED9C1B4D9AFE8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -167,9 +289,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1326D99E2020C3AA007BB83A /* Build configuration list for PBXNativeTarget "KalappUITests" */;
 			buildPhases = (
+				E4F5BC30976DE53E4A1BAF72 /* [CP] Check Pods Manifest.lock */,
 				1326D98B2020C3AA007BB83A /* Sources */,
 				1326D98C2020C3AA007BB83A /* Frameworks */,
 				1326D98D2020C3AA007BB83A /* Resources */,
+				59BE81B82922CBA4D9B96A2D /* [CP] Embed Pods Frameworks */,
+				EFEE6AD8D515A393A4DDFB14 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -232,9 +357,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1326D9A52020C41D007BB83A /* Info.plist in Resources */,
 				1326D97E2020C3A9007BB83A /* LaunchScreen.storyboard in Resources */,
 				1326D97B2020C3A9007BB83A /* Assets.xcassets in Resources */,
 				1326D9792020C3A9007BB83A /* Main.storyboard in Resources */,
+				13F093E32025143600D1C331 /* DuyuruTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,12 +381,182 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		07E73ECB5E764C747B690CE6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KalappTests/Pods-KalappTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		38BBBF78217899D6DFF85C80 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Kalapp/Pods-Kalapp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
+				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
+				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChameleonFramework.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Kalapp/Pods-Kalapp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		464A95034E69D06EDB03CB15 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Kalapp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		59BE81B82922CBA4D9B96A2D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KalappUITests/Pods-KalappUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		98DD05904D7ED9C1B4D9AFE8 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KalappTests/Pods-KalappTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E4F5BC30976DE53E4A1BAF72 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KalappUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EFEE6AD8D515A393A4DDFB14 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KalappUITests/Pods-KalappUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F39C29832CE2446037113607 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KalappTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F828EFC85510713D7D34A660 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Kalapp/Pods-Kalapp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		1326D96C2020C3A9007BB83A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1326D9762020C3A9007BB83A /* ViewController.swift in Sources */,
+				13FCA71B2023816B001AFB3B /* Network.swift in Sources */,
+				1326D9762020C3A9007BB83A /* MainPageViewController.swift in Sources */,
+				13D7EB622021EFC800B4470C /* SettingsViewController.swift in Sources */,
+				13D7EB602021EFB800B4470C /* AnketViewController.swift in Sources */,
+				13D7EB5E2021EFAB00B4470C /* AnketlerViewController.swift in Sources */,
+				13D7EB642021F5ED00B4470C /* Duyuru.swift in Sources */,
+				1393F56D20265F910072303B /* UserDetails.swift in Sources */,
+				13D7EB672021FF7D00B4470C /* DuyuruTableViewCell.swift in Sources */,
+				13D7EB5C2021EF3300B4470C /* ProfileViewController.swift in Sources */,
+				1393F56F202672E00072303B /* Anket.swift in Sources */,
+				1341ECF720249C8F0013B615 /* LoginViewController.swift in Sources */,
 				1326D9742020C3A9007BB83A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -424,34 +721,52 @@
 		};
 		1326D9992020C3AA007BB83A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 52C6559EE9E3119000C1BCD9 /* Pods-Kalapp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = Kalapp/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Kalapp/Supporting Fİles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kalom.Kalapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		1326D99A2020C3AA007BB83A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 00798345629C18D3B338AB7C /* Pods-Kalapp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = Kalapp/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Kalapp/Supporting Fİles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"ChameleonFramework\"",
+					"-framework",
+					"\"Moya\"",
+					"-framework",
+					"\"Result\"",
+					"-framework",
+					"\"SwiftyJSON\"",
+					"-force_load",
+					"${TARGET_BUILD_DIR}/libCordova.a",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kalom.Kalapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
 		1326D99C2020C3AA007BB83A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EF23FBFCEFC30846220F7E85 /* Pods-KalappTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -468,6 +783,7 @@
 		};
 		1326D99D2020C3AA007BB83A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C5341F358108093BE9138777 /* Pods-KalappTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -484,6 +800,7 @@
 		};
 		1326D99F2020C3AA007BB83A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4BDAFC78226F57FD732BB6F2 /* Pods-KalappUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -499,6 +816,7 @@
 		};
 		1326D9A02020C3AA007BB83A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 69A28D10C54A3A2811DF85DC /* Pods-KalappUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
