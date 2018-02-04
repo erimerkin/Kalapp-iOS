@@ -14,7 +14,6 @@
 		1326D97E2020C3A9007BB83A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1326D97C2020C3A9007BB83A /* LaunchScreen.storyboard */; };
 		1326D9892020C3AA007BB83A /* KalappTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1326D9882020C3AA007BB83A /* KalappTests.swift */; };
 		1326D9942020C3AA007BB83A /* KalappUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1326D9932020C3AA007BB83A /* KalappUITests.swift */; };
-		1326D9A52020C41D007BB83A /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1326D97F2020C3A9007BB83A /* Info.plist */; };
 		1341ECF720249C8F0013B615 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1341ECF620249C8F0013B615 /* LoginViewController.swift */; };
 		1393F56D20265F910072303B /* UserDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1393F56C20265F910072303B /* UserDetails.swift */; };
 		1393F56F202672E00072303B /* Anket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1393F56E202672E00072303B /* Anket.swift */; };
@@ -357,7 +356,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1326D9A52020C41D007BB83A /* Info.plist in Resources */,
 				1326D97E2020C3A9007BB83A /* LaunchScreen.storyboard in Resources */,
 				1326D97B2020C3A9007BB83A /* Assets.xcassets in Resources */,
 				1326D9792020C3A9007BB83A /* Main.storyboard in Resources */,
@@ -406,19 +404,23 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Kalapp/Pods-Kalapp-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
-				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChameleonFramework.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

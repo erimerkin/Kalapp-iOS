@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
-
+import SDWebImage
 
 class AnketlerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -87,6 +87,7 @@ class AnketlerViewController: UIViewController, UITableViewDelegate, UITableView
         cell.titleLabel.text = anketArray[indexPath.row].anketTitle
 //        cell.timeLabel.text = anketArray[indexPath.row].anketDate
         cell.userLabel.text = anketArray[indexPath.row].anketYazar
+        cell.anketImageView.sd_setImage(with: URL(string: anketArray[indexPath.row].anketImg), placeholderImage: UIImage(named: "profileDefault.png"))
         
         if anketArray[indexPath.row].anketIsVoted == 1 {
             cell.accessoryType = .checkmark
@@ -114,4 +115,11 @@ class AnketTableViewCell : UITableViewCell {
         
         // Configure the view for the selected state
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        contentView.frame = UIEdgeInsetsInsetRect(contentView.frame, UIEdgeInsetsMake(10, 10, 10, 10))
+    }
+    
 }

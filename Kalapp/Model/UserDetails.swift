@@ -9,11 +9,11 @@
 import Foundation
 
 class UserDetails {
-    let name = ""
-    let surname = ""
-    let userClass = ""
-    let profilePhoto = ""
-    let phone = ""
-    let email = ""
+    var name = ""
+    var surname = ""
+    var userClass = ""
+    var profilePhoto = ""
+    var phone = ""
+    var email = ""
     
 }

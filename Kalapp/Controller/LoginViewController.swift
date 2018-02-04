@@ -16,8 +16,7 @@ class LoginViewController: UIViewController {
 
     let keychain = KeychainSwift(keyPrefix: "user_")
     let defaults = UserDefaults.standard
-    var userId = ""
-    var userPass = ""
+
     
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var okulNoTextField: UITextField!
@@ -27,7 +26,6 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        getDetails()
         
         // Do any additional setup after loading the view.
     }
@@ -58,9 +56,8 @@ class LoginViewController: UIViewController {
                 let error = loginJSON["error"].stringValue
                 
                 if error == "true" {
-                   
-                    print(loginJSON["message"])
-                
+                   print(loginJSON["message"])
+               
                 }
                 else {
                    // Keychain set etme
@@ -109,18 +106,7 @@ class LoginViewController: UIViewController {
         performSegue(withIdentifier: "goToMainPage", sender: self)
     }
     
-    //TODO: - Keychain Get
-    
-    func getDetails() {
-        if (keychain.get("id") != nil) && (keychain.get("password") != nil) && (keychain.get("hash") != nil) {
-            userId = keychain.get("id")!
-            userPass = keychain.get("password")!
-            login(okulNo: userId, password: userPass, token: "1")
-        }
-        else {
-            print("keychain couldnt get")
-        }
-    }
+ 
     
     
     

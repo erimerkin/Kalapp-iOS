@@ -23,7 +23,8 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        coloredView.backgroundColor = UIColor.randomFlat()
         
         // Do any additional setup after loading the view.
     }
@@ -47,12 +48,12 @@ class ProfileViewController: UIViewController {
                 
                 if resultJSON["valid"] == true {
                     
-                    details.name == resultJSON["ad"].stringValue
-                    details.surname == resultJSON["soyad"].stringValue
-                    details.email == resultJSON["email"].stringValue
-                    details.phone == resultJSON["telefon"].stringValue
-                    details.userClass == resultJSON["class"].stringValue
-                    details.profilePhoto == resultJSON["img_url"].stringValue
+                    details.name = resultJSON["ad"].stringValue
+                    details.surname = resultJSON["soyad"].stringValue
+                    details.email = resultJSON["email"].stringValue
+                    details.phone = resultJSON["telefon"].stringValue
+                    details.userClass = resultJSON["class"].stringValue
+                    details.profilePhoto = resultJSON["img_url"].stringValue
                 }
             }
             else {

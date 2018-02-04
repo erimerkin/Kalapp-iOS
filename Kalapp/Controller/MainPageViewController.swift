@@ -137,8 +137,19 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     //MARK: - Update View
     
 
+    //TODO: - Keychain Get
     
-    
+    func getDetails() {
+        if (keychain.get("id") != nil) && (keychain.get("password") != nil) && (keychain.get("hash") != nil) {
+            let userId = keychain.get("id")!
+            let userPass = keychain.get("password")!
+            LoginViewController().login(okulNo: userId, password: userPass, token: "1")
+        }
+        else {
+            print("keychain couldnt get")
+            goToLogin()
+        }
+    }
     
     
     
