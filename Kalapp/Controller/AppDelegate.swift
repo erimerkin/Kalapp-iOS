@@ -18,14 +18,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         let userLoginStatus = UserDefaults.standard.bool(forKey: "isLoggedIn")
-        
-        if userLoginStatus == true {
+        let loginHash = UserDefaults.standard.string(forKey: "hash")
+        if userLoginStatus == true && loginHash != nil {
             let mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
             let protectedPage = mainStoryBoard.instantiateViewController(withIdentifier: "Main")
             window!.rootViewController = protectedPage
             window!.makeKeyAndVisible()
+            
         }
-        
+
 
         return true
     }

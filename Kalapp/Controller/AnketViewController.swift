@@ -7,32 +7,42 @@
 //
 
 import UIKit
+import WebKit
 
-class AnketViewController: UIViewController {
+class AnketViewController: UIViewController, WKUIDelegate {
 
+    let loginHash = UserDefaults.standard.string(forKey: "hash")
+    var postId = ""
+    var postTitle = ""
+    var posterName = ""
+    var anketImage = ""
     
- 
+    @IBOutlet weak var topBar: UIView!
+    @IBOutlet weak var webView: WKWebView!
+    @IBOutlet weak var userImage: UIImageView!
+    @IBOutlet weak var anketTitle: UILabel!
+    @IBOutlet weak var userName: UILabel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       // Do any additional setup after loading the view.
+        
+        
+        let myURL = URL(string: "http://kalapp.kalfest.com/?action=anket&do=anket_getir&hash=\(loginHash!)&id=\(postId)")
+        let myRequest = URLRequest(url: myURL!)
+        webView.load(myRequest)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func loadView() {
+        let webConfiguration = WKWebViewConfiguration()
+        webView = WKWebView(frame: .zero, configuration: webConfiguration)
+        webView.uiDelegate = self
+        view = webView
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
+        
     }
-    */
 
 }

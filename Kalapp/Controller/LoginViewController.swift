@@ -16,7 +16,7 @@ class LoginViewController: UIViewController {
 
     let keychain = KeychainSwift(keyPrefix: "user_")
     let defaults = UserDefaults.standard
-
+    var loginHash = ""
     
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var okulNoTextField: UITextField!
@@ -61,23 +61,23 @@ class LoginViewController: UIViewController {
                 }
                 else {
                    // Keychain set etme
-                    let loginHash = loginJSON["hash"].stringValue
+                    self.loginHash = loginJSON["hash"].stringValue
                     
-                    self.defaults.set(loginHash, forKey: "hash")
+                    self.defaults.set(self.loginHash, forKey: "hash")
                     self.defaults.set(true, forKey: "isLoggedIn")
                     self.keychain.set(password, forKey: "password")
                     self.keychain.set(okulNo, forKey: "id")
+                    UserDefaults.standard.synchronize()
                     
-                    
-                    if (self.defaults.string(forKey: "hash") != nil) &&  (self.defaults.bool(forKey: "isLoggedIn") == true) {
-                    
+                    if (self.defaults.string(forKey: "hash") == self.loginHash) &&  (self.defaults.bool(forKey: "isLoggedIn") == true) {
+                      
                         self.goToMainPage()
                     
                     }
                     
-                    else {
+                else {
                        
-                        print("error")
+                    print("error")
                     
                     }
                 }
@@ -92,12 +92,12 @@ class LoginViewController: UIViewController {
     
     @IBAction func buttonPressed(_ sender: UIButton) {
         
-        if okulNoTextField.text != nil && sifreTextField.text != nil {
+        if okulNoTextField.text != "" && sifreTextField.text != ""{
             login(okulNo: "\(okulNoTextField.text!)", password: sifreTextField.text!, token: "1")
         }
-            else {
+        else {
             print("error")
-            }
+        }
     }
     
     //TODO:- MainPage Segue
@@ -106,7 +106,14 @@ class LoginViewController: UIViewController {
         performSegue(withIdentifier: "goToMainPage", sender: self)
     }
     
- 
+    override func prepare(for segue: UIStoryboardSegue , sender: Any?) {
+        if segue.identifier == "goToMainPage" {
+            let navC = segue.destination as! UINavigationController
+            let mainVC = navC.topViewController as! MainPageViewController
+            mainVC.autoLoggedIn = false
+            mainVC.hashHash = loginHash
+        }
+    }
     
     
     

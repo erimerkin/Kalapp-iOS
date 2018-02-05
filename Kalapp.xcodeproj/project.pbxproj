@@ -22,9 +22,6 @@
 		13D7EB602021EFB800B4470C /* AnketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D7EB5F2021EFB800B4470C /* AnketViewController.swift */; };
 		13D7EB622021EFC800B4470C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D7EB612021EFC800B4470C /* SettingsViewController.swift */; };
 		13D7EB642021F5ED00B4470C /* Duyuru.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D7EB632021F5ED00B4470C /* Duyuru.swift */; };
-		13D7EB672021FF7D00B4470C /* DuyuruTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D7EB652021FF7D00B4470C /* DuyuruTableViewCell.swift */; };
-		13F093E32025143600D1C331 /* DuyuruTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13F093E22025143600D1C331 /* DuyuruTableViewCell.xib */; };
-		13FCA71B2023816B001AFB3B /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FCA71A2023816B001AFB3B /* Network.swift */; };
 		BF17E45FCFAD005003FD986D /* Pods_KalappUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FA1582E8012312C825938AF /* Pods_KalappUITests.framework */; };
 		D84C9E987DE5958097F58B42 /* Pods_Kalapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F445673C377B151FEF4DCF7 /* Pods_Kalapp.framework */; };
 		E2413F2EAF562B47443EBD02 /* Pods_KalappTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93ADDB80498DB4D8F9E51F0A /* Pods_KalappTests.framework */; };
@@ -70,9 +67,6 @@
 		13D7EB5F2021EFB800B4470C /* AnketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnketViewController.swift; sourceTree = "<group>"; };
 		13D7EB612021EFC800B4470C /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		13D7EB632021F5ED00B4470C /* Duyuru.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Duyuru.swift; sourceTree = "<group>"; };
-		13D7EB652021FF7D00B4470C /* DuyuruTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuyuruTableViewCell.swift; sourceTree = "<group>"; };
-		13F093E22025143600D1C331 /* DuyuruTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DuyuruTableViewCell.xib; sourceTree = "<group>"; };
-		13FCA71A2023816B001AFB3B /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		4BDAFC78226F57FD732BB6F2 /* Pods-KalappUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KalappUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KalappUITests/Pods-KalappUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		52C6559EE9E3119000C1BCD9 /* Pods-Kalapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kalapp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kalapp/Pods-Kalapp.debug.xcconfig"; sourceTree = "<group>"; };
 		5F445673C377B151FEF4DCF7 /* Pods_Kalapp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kalapp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -179,7 +173,6 @@
 		1326D9A32020C3DA007BB83A /* View */ = {
 			isa = PBXGroup;
 			children = (
-				13D7EB5A2021E99900B4470C /* Custom Cells */,
 				1326D9772020C3A9007BB83A /* Main.storyboard */,
 				1326D97A2020C3A9007BB83A /* Assets.xcassets */,
 				1326D97C2020C3A9007BB83A /* LaunchScreen.storyboard */,
@@ -200,21 +193,10 @@
 			isa = PBXGroup;
 			children = (
 				13D7EB632021F5ED00B4470C /* Duyuru.swift */,
-				13FCA71A2023816B001AFB3B /* Network.swift */,
 				1393F56C20265F910072303B /* UserDetails.swift */,
 				1393F56E202672E00072303B /* Anket.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		13D7EB5A2021E99900B4470C /* Custom Cells */ = {
-			isa = PBXGroup;
-			children = (
-				13D7EB652021FF7D00B4470C /* DuyuruTableViewCell.swift */,
-				13F093E22025143600D1C331 /* DuyuruTableViewCell.xib */,
-			);
-			name = "Custom Cells";
-			path = "New Group";
 			sourceTree = "<group>";
 		};
 		1A59C6E5AAAC54AEC4BB7048 /* Pods */ = {
@@ -359,7 +341,6 @@
 				1326D97E2020C3A9007BB83A /* LaunchScreen.storyboard in Resources */,
 				1326D97B2020C3A9007BB83A /* Assets.xcassets in Resources */,
 				1326D9792020C3A9007BB83A /* Main.storyboard in Resources */,
-				13F093E32025143600D1C331 /* DuyuruTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,6 +387,7 @@
 				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
@@ -417,6 +399,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChameleonFramework.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
@@ -548,14 +531,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				13FCA71B2023816B001AFB3B /* Network.swift in Sources */,
 				1326D9762020C3A9007BB83A /* MainPageViewController.swift in Sources */,
 				13D7EB622021EFC800B4470C /* SettingsViewController.swift in Sources */,
 				13D7EB602021EFB800B4470C /* AnketViewController.swift in Sources */,
 				13D7EB5E2021EFAB00B4470C /* AnketlerViewController.swift in Sources */,
 				13D7EB642021F5ED00B4470C /* Duyuru.swift in Sources */,
 				1393F56D20265F910072303B /* UserDetails.swift in Sources */,
-				13D7EB672021FF7D00B4470C /* DuyuruTableViewCell.swift in Sources */,
 				13D7EB5C2021EF3300B4470C /* ProfileViewController.swift in Sources */,
 				1393F56F202672E00072303B /* Anket.swift in Sources */,
 				1341ECF720249C8F0013B615 /* LoginViewController.swift in Sources */,

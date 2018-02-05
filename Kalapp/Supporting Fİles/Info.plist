@@ -26,6 +26,15 @@
 	<dict>
 		<key>NSExceptionDomains</key>
 		<dict>
+			<key>kalfest.com </key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSExceptionMinimumTLSVersion</key>
+				<string>TLSv1.1</string>
+			</dict>
 			<key>kalapp.kalfest.com</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
