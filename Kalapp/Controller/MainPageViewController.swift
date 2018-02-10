@@ -19,18 +19,21 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     var duyuruArray = [Duyuru]()
     let frbToken = 1
     let keychain = KeychainSwift(keyPrefix: "user_")
-    var userHash = UserDefaults.standard.string(forKey: "hash")
+    var userHash = ""
     var isDataFinished = false
-    var autoLoggedIn = true
     var hashHash = ""
+    var failure = false
+    var autoLoggedIn = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
         retrieveData(index: duyuruArray.count)
-  
+        print("view did appear")
         duyuruTableView.delegate = self
         duyuruTableView.dataSource = self
+
 
         
 }
@@ -48,19 +51,23 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     //TODO: - Retrieve Duyuru Page
     func retrieveData(index: Int){
         
+        
         var params : [String : Any] = [:]
-        let userHash = UserDefaults.standard.string(forKey: "hash")
         params["s"] = index
         params["f"] = index + 5
+        var count = 0
         
-        if autoLoggedIn == false && hashHash == userHash {
-                params["hash"] = hashHash
+        if autoLoggedIn == false && hashHash != "" {
+            params["hash"] = hashHash
+        }
+        else if let loginHash = UserDefaults.standard.string(forKey: "hash") {
+        params["hash"] = loginHash
         }
         else {
-             params["hash"] = userHash
+            goToLogin()
         }
 
-        
+
         Alamofire.request("http://kalapp.kalfest.com/?action=duyuru", method: .get, parameters: params).responseJSON
             { response in
                         if response.result.isSuccess {
@@ -101,7 +108,16 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                             Alamofire.request("http://kalapp.kalfest.com/?action=duyuru", method: .get, parameters: params).responseString  { stringResponse in
                                 if stringResponse.result.isSuccess {
                                     print(stringResponse.result.value!)
-                                    self.goToLogin()
+                                    while count <= 3 && self.failure == true {
+                                        count += 1
+                                        self.failure = true
+                                        self.retrieveData(index: self.duyuruArray.count)
+                                        print(count)
+                                        if count == 3 {
+                                            self.goToLogin()
+                                        }
+                                    }
+
                                 }
                                 else {
                                     print(stringResponse.result.error!)

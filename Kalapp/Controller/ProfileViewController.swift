@@ -11,20 +11,14 @@ import Alamofire
 import SwiftyJSON
 import ChameleonFramework
 
-class ProfileViewController: UIViewController {
-
-    @IBOutlet weak var coloredView: UIView!
-    
+class ProfileViewController: UIViewController, SettingsDelegate {
+   
     let userHash = UserDefaults.standard.string(forKey: "hash")
-    
-    @IBOutlet weak var userProfileImage: UIImageView!
-    
-
-    
+    var i = 0
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        coloredView.backgroundColor = UIColor.randomFlat()
         
         // Do any additional setup after loading the view.
     }
@@ -54,16 +48,37 @@ class ProfileViewController: UIViewController {
                     details.phone = resultJSON["telefon"].stringValue
                     details.userClass = resultJSON["class"].stringValue
                     details.profilePhoto = resultJSON["img_url"].stringValue
+                    
+                    print("true to his words ma lord")
                 }
             }
             else {
                 print("Alamofire error \(response.result.error!)")
-            }
+                while self.i <= 3 {
+                    self.getDetails()
+                    self.i = self.i + 1
+                }
+                }
             
         }
-        
-        
+    
     }
 
+    //MARK: - Page Interactions After Dismiss
+
+    func reloadPage(result: Bool) {
+        if result == true {
+            getDetails()
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToSettings" {
+            
+            let settingVC = segue.destination as! SettingsViewController
+            
+            settingVC.delegate = self
+        }
+    }
 
 }

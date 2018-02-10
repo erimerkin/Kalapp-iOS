@@ -19,12 +19,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let userLoginStatus = UserDefaults.standard.bool(forKey: "isLoggedIn")
         let loginHash = UserDefaults.standard.string(forKey: "hash")
-        if userLoginStatus == true && loginHash != nil {
-            let mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
+        let mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
+
+       if userLoginStatus == true && loginHash != nil {
+
             let protectedPage = mainStoryBoard.instantiateViewController(withIdentifier: "Main")
             window!.rootViewController = protectedPage
             window!.makeKeyAndVisible()
-            
+        
         }
 
 
@@ -51,6 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+
     }
 
 }
