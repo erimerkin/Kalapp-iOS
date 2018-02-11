@@ -9,6 +9,9 @@
 import UIKit
 import WebKit
 
+var myContext = 0
+
+
 class AnketViewController: UIViewController, WKUIDelegate {
 
     let loginHash = UserDefaults.standard.string(forKey: "hash")
@@ -17,32 +20,64 @@ class AnketViewController: UIViewController, WKUIDelegate {
     var posterName = ""
     var anketImage = ""
     
+    var webView: WKWebView!
+    var progressView: UIProgressView!
+
+    
     @IBOutlet weak var topBar: UIView!
-    @IBOutlet weak var webView: WKWebView!
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var anketTitle: UILabel!
     @IBOutlet weak var userName: UILabel!
     
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        
-        
-        let myURL = URL(string: "http://kalapp.kalfest.com/?action=anket&do=anket_getir&hash=\(loginHash!)&id=\(postId)")
-        let myRequest = URLRequest(url: myURL!)
-        webView.load(myRequest)
-    }
-
     override func loadView() {
         let webConfiguration = WKWebViewConfiguration()
         webView = WKWebView(frame: .zero, configuration: webConfiguration)
         webView.uiDelegate = self
         view = webView
+        
+        progressView = UIProgressView(progressViewStyle: .default)
+        progressView.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
+        progressView.tintColor = #colorLiteral(red: 0.6576176882, green: 0.7789518833, blue: 0.2271372974, alpha: 1)
+        navigationController?.navigationBar.addSubview(progressView)
+        let navigationBarBounds = self.navigationController?.navigationBar.bounds
+        progressView.frame = CGRect(x: 0, y: navigationBarBounds!.size.height - 2, width: navigationBarBounds!.size.width, height: 2)
     }
     
-    override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
+    deinit {
+        //remove all observers
+        webView.removeObserver(self, forKeyPath: "estimatedProgress")
+        //remove progress bar from navigation bar
+        progressView.removeFromSuperview()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
+        self.title = postTitle
+                
+        let myURL = URL(string: "http://kalapp.kalfest.com/?action=anket&do=anket_getir&hash=\(loginHash!)&id=\(postId)")
+        let myRequest = URLRequest(url: myURL!)
+        webView.load(myRequest)
+        webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: &myContext)
+    }
+
+
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        
+        guard let change = change else { return }
+        if context != &myContext {
+            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
+            return
+        }
+        
+
+        if keyPath == "estimatedProgress" {
+            if let progress = (change[NSKeyValueChangeKey.newKey] as AnyObject).floatValue {
+                progressView.progress = progress;
+            }
+            return
+        }
     }
 
 }

@@ -10,21 +10,36 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import SDWebImage
+import ChameleonFramework
 
 class AnketlerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var anketArray : [Anket] = [Anket]()
     var params : [String : String] = ["hash" : UserDefaults.standard.string(forKey: "hash")!]
     var currentAnketId = ""
+    var currentAnketTitle = ""
     
     @IBOutlet weak var anketTableView: UITableView!
     
+    //MARK: - Pull-to-Refresh
+    
+    lazy var refresh: UIRefreshControl = {
+        let refresh = UIRefreshControl()
+        refresh.addTarget(self, action:
+            #selector(MainPageViewController.handleRefresh(_:)),
+                          for: UIControlEvents.valueChanged)
+        refresh.tintColor = UIColor.red
+        
+        
+        return refresh
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         anketTableView.delegate = self
         anketTableView.dataSource = self
+        self.anketTableView.addSubview(self.refresh)
         
         anketGetir(index: anketArray.count)
         // Do any additional setup after loading the view.
@@ -59,13 +74,21 @@ class AnketlerViewController: UIViewController, UITableViewDelegate, UITableView
                     anket.anketTitle = anketJSON[i]["title"].stringValue
                     anket.anketYazar = anketJSON[i]["yazar"].stringValue
                     
+                    if self.refresh.isRefreshing == true {
+                            self.refresh.endRefreshing()
+                    }
+                        
                     self.anketArray.append(anket)
                     self.anketTableView.reloadData()
+                       
+
                     }
                 }
             }
             else {
                 print("anket get error: \(response.result.error!)")
+                self.refresh.endRefreshing()
+                
             }
         }
     }
@@ -78,36 +101,69 @@ class AnketlerViewController: UIViewController, UITableViewDelegate, UITableView
     
     //TODO: - Row sayısı
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return anketArray.count
+        return 1
     }
     
     
     //TODO: - Cell respawn
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.row == anketArray.count - 1 { anketGetir(index: anketArray.count)}
+        if indexPath.section == anketArray.count - 1 { anketGetir(index: anketArray.count)}
         
         let cell = anketTableView.dequeueReusableCell(withIdentifier: "customAnketTableViewCell", for: indexPath) as! AnketTableViewCell
         
-        cell.titleLabel.text = anketArray[indexPath.row].anketTitle
-//        cell.timeLabel.text = anketArray[indexPath.row].anketDate
-        cell.userLabel.text = anketArray[indexPath.row].anketYazar
-        cell.anketImageView.sd_setImage(with: URL(string: anketArray[indexPath.row].anketImg), placeholderImage: UIImage(named: "profileDefault.png"))
+
         
-        if anketArray[indexPath.row].anketIsVoted == 1 {
+        cell.titleLabel.text = anketArray[indexPath.section].anketTitle
+//        cell.timeLabel.text = anketArray[indexPath.section].anketDate
+        cell.userLabel.text = anketArray[indexPath.section].anketYazar
+        cell.anketImageView.sd_setImage(with: URL(string: anketArray[indexPath.section].anketImg), placeholderImage: UIImage(named: "profileDefault.png"))
+        
+
+        
+        if anketArray[indexPath.section].anketIsVoted == 1 {
             cell.accessoryType = .checkmark
             cell.indicatorLabel.text = "SONUÇ"
-            
+
         }
         else {
             cell.accessoryType = .disclosureIndicator
             cell.indicatorLabel.text = "KATIL"
         }
-            
+        
         
         return cell
     }
 
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return anketArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        
+        let view:UIView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: self.view.bounds.size.width, height: 4))
+        view.backgroundColor = .flatWhite()
+        
+        return view
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 8
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        currentAnketId = anketArray[indexPath.section].anketId
+        currentAnketTitle = anketArray[indexPath.section].anketTitle
+        self.anketTableView.deselectRow(at: indexPath, animated: true)
+        performSegue(withIdentifier: "showAnket", sender: self)
+
+
+    }
+   
+        /////////////////////////////////////////////////////////////////////////
+    
+    
     //MARK: - AnketId'si aktarıldı
     
     
@@ -116,16 +172,24 @@ class AnketlerViewController: UIViewController, UITableViewDelegate, UITableView
             
             let firstVC = segue.destination as! AnketViewController
             firstVC.postId = currentAnketId
-            
+            firstVC.postTitle = currentAnketTitle
         }
     }
     
     
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        currentAnketId = anketArray[indexPath.row].anketId
-        performSegue(withIdentifier: "showAnket", sender: self)
-    }
+
      
+
+    
+    //MARK: - HandleRefresh
+    
+    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
+        
+        anketArray.removeAll()
+        anketGetir(index: anketArray.count)
+        
+    }
+    
     
 }
 
@@ -145,5 +209,9 @@ class AnketTableViewCell : UITableViewCell {
         // Configure the view for the selected state
     }
     
-   
+
+    
+    
+    
+    
 }

@@ -17,7 +17,8 @@ class LoginViewController: UIViewController {
     let keychain = KeychainSwift(keyPrefix: "user_")
     let defaults = UserDefaults.standard
     var loginHash = ""
-
+    var errorAlert = UIAlertController()
+    var action = UIAlertAction()
 
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var okulNoTextField: UITextField!
@@ -58,8 +59,15 @@ class LoginViewController: UIViewController {
                 
                 
                 if error == "true" {
-                   print(loginJSON["message"])
-                    }
+                   
+                    self.errorAlert = UIAlertController(title: "Hata", message: loginJSON["message"].stringValue, preferredStyle: .alert)
+                    
+                    self.action = UIAlertAction(title: "Tamam", style: .default, handler: nil)
+                    
+                    self.errorAlert.addAction(self.action)
+                    
+                    self.present(self.errorAlert, animated: true, completion: nil)
+                }
                     
                 else {
                    // Keychain set etme
@@ -70,7 +78,8 @@ class LoginViewController: UIViewController {
                     self.keychain.set(okulNo, forKey: "id")
                     UserDefaults.standard.synchronize()
                     
-
+                    self.okulNoTextField.text = ""
+                    self.sifreTextField.text = ""
                     
                     
                     if self.defaults.string(forKey: "hash") == self.loginHash {
@@ -82,13 +91,31 @@ class LoginViewController: UIViewController {
                         
                     else {
                         print("error")
+                        self.errorAlert = UIAlertController(title: "Hata", message: "verilerde sıkıntı yaşandı lütfen tekrar deneyin", preferredStyle: .alert)
+                        
+                        self.action = UIAlertAction(title: "Tamam", style: .default, handler: nil)
+                        
+                        self.errorAlert.addAction(self.action)
+                        
+                        self.present(self.errorAlert, animated: true, completion: nil)
+                        
                         }
+                    
+                    
 
+                    
                 }
             
             }
             else {
                 print("Error: \(String(describing: response.result.error))")
+                self.errorAlert = UIAlertController(title: "Hata", message: "connection problems", preferredStyle: .alert)
+                
+                self.action = UIAlertAction(title: "Tamam", style: .default, handler: nil)
+                
+                self.errorAlert.addAction(self.action)
+                
+                self.present(self.errorAlert, animated: true, completion: nil)
                 }
         }
     }
@@ -102,6 +129,13 @@ class LoginViewController: UIViewController {
         }
         else {
             print("error")
+            self.errorAlert = UIAlertController(title: "Hata", message: "Lütfen bütün alanları doldurunuz", preferredStyle: .alert)
+            
+            self.action = UIAlertAction(title: "Tamam", style: .default, handler: nil)
+            
+            self.errorAlert.addAction(self.action)
+            
+            self.present(self.errorAlert, animated: true, completion: nil)
         }
     }
     

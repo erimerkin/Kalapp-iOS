@@ -1,0 +1,6 @@
+framework module Pods_KalappTests {
+  umbrella header "Pods-KalappTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

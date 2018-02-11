@@ -25,19 +25,37 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     var failure = false
     var autoLoggedIn = false
     
+    //MARK: - Pull-to-Refresh
+    
+    lazy var refresh: UIRefreshControl = {
+        let refresh = UIRefreshControl()
+        refresh.addTarget(self, action:
+            #selector(MainPageViewController.handleRefresh(_:)),
+                                 for: UIControlEvents.valueChanged)
+        refresh.tintColor = UIColor.red
+        
+        return refresh
+    }()
+    
+    //MARK: - Load Functions
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+
         retrieveData(index: duyuruArray.count)
         print("view did appear")
+        
+        
         duyuruTableView.delegate = self
         duyuruTableView.dataSource = self
-
-
-        
+        self.duyuruTableView.addSubview(self.refresh)
+        refresh.beginRefreshing()
+       
 }
 
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -94,6 +112,11 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                                     duyuru.contentImg = responseJSON[i]["content_img"].stringValue
                                     print("image link got")
                                 }
+                                
+                                if self.refresh.isRefreshing == true {
+                                    self.refresh.endRefreshing()
+                                }
+                                
                                 self.duyuruArray.append(duyuru)
                                 self.duyuruTableView.reloadData()
                                 
@@ -133,44 +156,64 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     
     //TODO: - numbersOfRowsInSection
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return duyuruArray.count
+        return 1
     }
     
     
     //TODO: - cellForRowAt
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.row == duyuruArray.count - 1 { retrieveData(index: duyuruArray.count)}
+        if indexPath.section == duyuruArray.count - 1 { retrieveData(index: duyuruArray.count)} else { print("out of stock")}
         
-        if duyuruArray[indexPath.row].contentImg == "nil"  {
-            let cell = duyuruTableView.dequeueReusableCell(withIdentifier: "customDuyuruTableViewCell", for: indexPath) as! DuyuruTableViewCell
-        //        cell.userImageView.sd_setImage(with: URL(string: duyuruArray[number].userImgURL))
-        //        cell.userImageView.layer.cornerRadius = 24
-        //        cell.userImageView.layer.masksToBounds = true
-            cell.userName.text = duyuruArray[indexPath.row].userName
-            cell.contentDate.text = duyuruArray[indexPath.row].postDate
-            cell.contentTitle.text = duyuruArray[indexPath.row].postTitle
-            cell.contentContext.text = duyuruArray[indexPath.row].postTitle
             
-            configureTableView()
-            return cell
-        }
-        else {
+        if duyuruArray[indexPath.section].contentImg == "nil" {
             let imagedCell = duyuruTableView.dequeueReusableCell(withIdentifier: "customImagedDuyuruTableViewCell", for: indexPath) as! ImagedDuyuruTableViewCell
             print("resimli cell yükleniyor")
             imagedCell.contentImage.sd_setImage(with: URL(string: duyuruArray[indexPath.row].contentImgURL))
-            imagedCell.userName.text = duyuruArray[indexPath.row].userName
-            imagedCell.contentDate.text = duyuruArray[indexPath.row].postDate
-            imagedCell.contentTitle.text = duyuruArray[indexPath.row].postTitle
-            imagedCell.contentContext.text = duyuruArray[indexPath.row].postTitle
-
+            imagedCell.userName.text = duyuruArray[indexPath.section].userName
+            imagedCell.contentDate.text = duyuruArray[indexPath.section].postDate
+            imagedCell.contentTitle.text = duyuruArray[indexPath.section].postTitle
+            imagedCell.contentContext.text = duyuruArray[indexPath.section].postTitle
+            
+            //            imagedCell.userImageView.layer.cornerRadius = 15
+            //            imagedCell.userImageView.layer.masksToBounds = true
+            
             configureTableView()
             return imagedCell
         }
-        
+        else  {
+            let cell = duyuruTableView.dequeueReusableCell(withIdentifier: "customDuyuruTableViewCell", for: indexPath) as! DuyuruTableViewCell
+        //        cell.userImageView.sd_setImage(with: URL(string: duyuruArray[number].userImgURL))
 
+            cell.userName.text = duyuruArray[indexPath.section].userName
+            cell.contentDate.text = duyuruArray[indexPath.section].postDate
+            cell.contentTitle.text = duyuruArray[indexPath.section].postTitle
+            cell.contentContext.text = duyuruArray[indexPath.section].postTitle
+            
+            configureTableView()
+
+            return cell
+        }
+       
         
     }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return duyuruArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        
+        let view:UIView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: self.view.bounds.size.width, height: 4))
+        view.backgroundColor = .flatWhite()
+        
+        return view
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 8
+    }
+    
     
     //TODO: - AUTO-RESIZE
     func configureTableView() {
@@ -182,15 +225,32 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         duyuruTableView.estimatedRowHeight = 300
     }
     
+    
+    /////////////////////////////////////////////////////////////////////////////////
+    
+    
+    
     //MARK: - goToLogin
     
     func goToLogin(){
         performSegue(withIdentifier: "goToLogin", sender: self)
     }
 
-   
-  
+    //MARK: - HandleRefresh
+    
+    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
+        
+        duyuruArray.removeAll()
+        retrieveData(index: 0)
+        
+    }
+
+
+
 }
+
+
+
     
     
     

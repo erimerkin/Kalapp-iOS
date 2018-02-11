@@ -19,6 +19,13 @@ class SettingsViewController: UIViewController {
     var params : [String : String] = ["hash" : UserDefaults.standard.string(forKey: "hash")!]
     var delegate : SettingsDelegate?
     
+    var userName = ""
+    var userPhoto = ""
+    var userClass = ""
+    
+    var errorAlert = UIAlertController()
+    var action = UIAlertAction()
+    
     //MARK:- Storyboard Outlets
     
     @IBOutlet weak var userImageView: UIImageView!
@@ -87,6 +94,14 @@ class SettingsViewController: UIViewController {
                 }
                 else {
                         print("error")
+                    
+                    self.errorAlert = UIAlertController(title: "Hata", message: "hata", preferredStyle: .alert)
+                    
+                    self.action = UIAlertAction(title: "Tamam", style: .default, handler: nil)
+                    
+                    self.errorAlert.addAction(self.action)
+                    
+                    self.present(self.errorAlert, animated: true, completion: nil)
                 }
                
                 
@@ -108,14 +123,15 @@ class SettingsViewController: UIViewController {
     //MARK: - Buttons
 
     @IBAction func completedButtonPressed(_ sender: UIBarButtonItem) {
-        dismiss(animated: true) {
-            self.delegate?.reloadPage(result: true)
-        }
+        sendRequest()
+        navigationController?.popViewController(animated: true)
+        self.delegate?.reloadPage(result: true)
+        
         
     }
     
     @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
     
     @IBAction func logoutButtonPressed(_ sender: UIButton) {
