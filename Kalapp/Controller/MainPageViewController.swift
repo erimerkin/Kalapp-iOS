@@ -24,6 +24,8 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     var hashHash = ""
     var failure = false
     var autoLoggedIn = false
+    var errorAlert = UIAlertController()
+    var action = UIAlertAction()
     
     //MARK: - Pull-to-Refresh
     
@@ -69,25 +71,27 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     //TODO: - Retrieve Duyuru Page
     func retrieveData(index: Int){
         
+        if Connectivity.isConnectedToInternet {
         
-        var params : [String : Any] = [:]
-        params["s"] = index
-        params["f"] = index + 5
-        var count = 0
         
-        if autoLoggedIn == false && hashHash != "" {
-            params["hash"] = hashHash
-        }
-        else if let loginHash = UserDefaults.standard.string(forKey: "hash") {
-        params["hash"] = loginHash
-        }
-        else {
-            goToLogin()
-        }
+            var params : [String : Any] = [:]
+            params["s"] = index
+            params["f"] = index + 5
+            var count = 0
+        
+            if autoLoggedIn == false && hashHash != "" {
+                params["hash"] = hashHash
+            }
+            else if let loginHash = UserDefaults.standard.string(forKey: "hash") {
+                params["hash"] = loginHash
+            }
+            else {
+                goToLogin()
+            }
 
 
-        Alamofire.request("http://kalapp.kalfest.com/?action=duyuru", method: .get, parameters: params).responseJSON
-            { response in
+            Alamofire.request("http://kalapp.kalfest.com/?action=duyuru", method: .get, parameters: params).responseJSON
+                { response in
                         if response.result.isSuccess {
                             let responseJSON : JSON = JSON(response.result.value!)
                             print(responseJSON)
@@ -131,12 +135,12 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                             Alamofire.request("http://kalapp.kalfest.com/?action=duyuru", method: .get, parameters: params).responseString  { stringResponse in
                                 if stringResponse.result.isSuccess {
                                     print(stringResponse.result.value!)
-                                    while count <= 3 && self.failure == true {
+                                    while count <= 4 && self.failure == true {
                                         count += 1
                                         self.failure = true
                                         self.retrieveData(index: self.duyuruArray.count)
                                         print(count)
-                                        if count == 3 {
+                                        if count == 4 {
                                             self.goToLogin()
                                         }
                                     }
@@ -144,11 +148,41 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                                 }
                                 else {
                                     print(stringResponse.result.error!)
+                                    while count <= 4 && self.failure == true {
+                                        count += 1
+                                        self.failure = true
+                                        self.retrieveData(index: self.duyuruArray.count)
+                                        print(count)
+                                        if count == 4 {
+                                            
+                                        self.refresh.endRefreshing()
+                                        }
                                 }
                             }
                     }
                 }
             }
+        }
+            else {
+                print("no connection")
+            
+            if refresh.isRefreshing == true {
+                
+                refresh.endRefreshing()
+                
+            }
+            
+                self.errorAlert = UIAlertController(title: "Hata", message: "connection error", preferredStyle: .alert)
+                
+                self.action = UIAlertAction(title: "Tamam", style: .default, handler: nil)
+                
+                self.errorAlert.addAction(self.action)
+                
+                self.present(self.errorAlert, animated: true, completion: nil)
+
+                
+            }
+    }
     
     /////////////////////////////////////////////////
     //MARK: - TableView
@@ -165,37 +199,40 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         
         if indexPath.section == duyuruArray.count - 1 { retrieveData(index: duyuruArray.count)} else { print("out of stock")}
         
+        let cell = duyuruTableView.dequeueReusableCell(withIdentifier: "customDuyuruTableViewCell", for: indexPath) as! DuyuruTableViewCell
+        
+        if duyuruArray.count != 0 {
+        
+        cell.userNameLabel.text = duyuruArray[indexPath.section].userName
+        // cell.contentDate.text = duyuruArray[indexPath.section].postDate
+        cell.titleLabel.text = duyuruArray[indexPath.section].postTitle
+        cell.contentLabel.text = duyuruArray[indexPath.section].postTitle
+        
+        cell.userImageView.layer.cornerRadius = 24
+        cell.userImageView.layer.masksToBounds = true
+        
+        cell.cellView.layer.cornerRadius = 12
+        cell.userImageView.layer.masksToBounds = true 
             
         if duyuruArray[indexPath.section].contentImg == "nil" {
-            let imagedCell = duyuruTableView.dequeueReusableCell(withIdentifier: "customImagedDuyuruTableViewCell", for: indexPath) as! ImagedDuyuruTableViewCell
-            print("resimli cell yükleniyor")
-            imagedCell.contentImage.sd_setImage(with: URL(string: duyuruArray[indexPath.row].contentImgURL))
-            imagedCell.userName.text = duyuruArray[indexPath.section].userName
-            imagedCell.contentDate.text = duyuruArray[indexPath.section].postDate
-            imagedCell.contentTitle.text = duyuruArray[indexPath.section].postTitle
-            imagedCell.contentContext.text = duyuruArray[indexPath.section].postTitle
-            
-            //            imagedCell.userImageView.layer.cornerRadius = 15
-            //            imagedCell.userImageView.layer.masksToBounds = true
-            
-            configureTableView()
-            return imagedCell
-        }
-        else  {
-            let cell = duyuruTableView.dequeueReusableCell(withIdentifier: "customDuyuruTableViewCell", for: indexPath) as! DuyuruTableViewCell
-        //        cell.userImageView.sd_setImage(with: URL(string: duyuruArray[number].userImgURL))
 
-            cell.userName.text = duyuruArray[indexPath.section].userName
-            cell.contentDate.text = duyuruArray[indexPath.section].postDate
-            cell.contentTitle.text = duyuruArray[indexPath.section].postTitle
-            cell.contentContext.text = duyuruArray[indexPath.section].postTitle
+           cell.contentImageView.isHidden = true
+        
+        }
+        else {
+        
+            print("resimli cell yükleniyor")
+            cell.contentImageView.sd_setImage(with: URL(string: duyuruArray[indexPath.section].contentImgURL))
             
+        }
+        }
+        else {
+                self.retrieveData(index: duyuruArray.count)
+        }
             configureTableView()
 
             return cell
-        }
        
-        
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -252,32 +289,15 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
 
 
     
+class DuyuruTableViewCell : UITableViewCell {
     
     
- class DuyuruTableViewCell: UITableViewCell {
-    
-    
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var contentLabel: UILabel!
+    @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var userImageView: UIImageView!
-    @IBOutlet weak var userName: UILabel!
-    
-    @IBOutlet weak var contentTitle: UILabel!
-    @IBOutlet weak var contentContext: UILabel!
-    @IBOutlet weak var contentDate: UILabel!
-
-    
-    
-}
-
-class ImagedDuyuruTableViewCell: UITableViewCell {
-    
-    @IBOutlet weak var userImageView: UIImageView!
-    @IBOutlet weak var userName: UILabel!
-    
-    @IBOutlet weak var contentTitle: UILabel!
-    @IBOutlet weak var contentDate: UILabel!
-    @IBOutlet weak var contentContext: UILabel!
-    @IBOutlet weak var contentImage: UIImageView!
-    
+    @IBOutlet weak var cellView: UIView!
+    @IBOutlet weak var contentImageView: UIImageView!
     
     
 }

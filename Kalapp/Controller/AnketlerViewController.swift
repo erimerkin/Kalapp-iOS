@@ -112,7 +112,7 @@ class AnketlerViewController: UIViewController, UITableViewDelegate, UITableView
         
         let cell = anketTableView.dequeueReusableCell(withIdentifier: "customAnketTableViewCell", for: indexPath) as! AnketTableViewCell
         
-
+        if anketArray.count != 0 {
         
         cell.titleLabel.text = anketArray[indexPath.section].anketTitle
 //        cell.timeLabel.text = anketArray[indexPath.section].anketDate
@@ -130,7 +130,11 @@ class AnketlerViewController: UIViewController, UITableViewDelegate, UITableView
             cell.accessoryType = .disclosureIndicator
             cell.indicatorLabel.text = "KATIL"
         }
+        }
         
+        else {
+            self.anketGetir(index: anketArray.count)
+        }
         
         return cell
     }
@@ -152,10 +156,15 @@ class AnketlerViewController: UIViewController, UITableViewDelegate, UITableView
         return 8
     }
     
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        print("test")
+        
         currentAnketId = anketArray[indexPath.section].anketId
         currentAnketTitle = anketArray[indexPath.section].anketTitle
-        self.anketTableView.deselectRow(at: indexPath, animated: true)
+
+        anketTableView.deselectRow(at: indexPath, animated: true)
+        
         performSegue(withIdentifier: "showAnket", sender: self)
 
 
@@ -202,16 +211,6 @@ class AnketTableViewCell : UITableViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var userLabel: UILabel!
     @IBOutlet weak var indicatorLabel: UILabel!
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
-    }
-    
-
-    
-    
     
     
 }
