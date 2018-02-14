@@ -17,4 +17,5 @@ class Duyuru {
     var contentImg = ""
     var contentImgURL = ""
     var postId : Int = 0
+    var isThereImage = false
 }

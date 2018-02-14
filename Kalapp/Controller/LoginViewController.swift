@@ -11,6 +11,7 @@ import Alamofire
 import ChameleonFramework
 import SwiftyJSON
 import KeychainSwift
+import NVActivityIndicatorView
 
 extension UIViewController
 {
@@ -29,7 +30,7 @@ extension UIViewController
     }
 }
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, NVActivityIndicatorViewable{
 
     let keychain = KeychainSwift(keyPrefix: "user_")
     let defaults = UserDefaults.standard
@@ -60,6 +61,8 @@ class LoginViewController: UIViewController {
     //TODO: - Login
     
     func login(okulNo: String, password: String) {
+        
+        startAnimating(CGSize(width: 200, height: 40), message: "Yükleniyor", type: NVActivityIndicatorType.ballRotateChase, color: UIColor.flatRed())
         
         var loginCred : [String: String] = [:]
         loginCred["okul_no"] = "\(okulNo)"

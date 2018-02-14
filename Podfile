@@ -8,6 +8,7 @@ target 'Kalapp' do
   # Pods for Kalapp
 
     pod 'Alamofire'
+    pod 'AlamofireImage'
     pod 'SwiftyJSON'
     pod 'ChameleonFramework'
     pod 'KeychainSwift'
