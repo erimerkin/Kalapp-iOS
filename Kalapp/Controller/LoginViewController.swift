@@ -42,10 +42,15 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable{
     @IBOutlet weak var okulNoTextField: UITextField!
     @IBOutlet weak var sifreTextField: UITextField!
     @IBOutlet weak var kalappLogoImageView: UIImageView!
+    @IBOutlet weak var loginButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboard()
+        self.backgroundView.backgroundColor = UIColor(gradientStyle: UIGradientStyle.topToBottom, withFrame: self.backgroundView.frame, andColors:[UIColor.flatLimeColorDark(), UIColor.flatForestGreen()])
+        loginButton.backgroundColor = .flatYellow()
+        loginButton.layer.cornerRadius = 5
+        loginButton.layer.masksToBounds = true
         
         // Do any additional setup after loading the view.
     }
@@ -62,7 +67,7 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable{
     
     func login(okulNo: String, password: String) {
         
-        startAnimating(CGSize(width: 200, height: 40), message: "Yükleniyor", type: NVActivityIndicatorType.ballRotateChase, color: UIColor.flatRed())
+        startAnimating(CGSize(width: 200, height: 40), message: "Yükleniyor", type: NVActivityIndicatorType.ballRotateChase, color: UIColor.flatGreenColorDark())
         
         var loginCred : [String: String] = [:]
         loginCred["okul_no"] = "\(okulNo)"
@@ -86,6 +91,8 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable{
                     
                     self.errorAlert.addAction(self.action)
                     
+                    self.stopAnimating()
+                    
                     self.present(self.errorAlert, animated: true, completion: nil)
                 }
                     
@@ -101,9 +108,11 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable{
                     self.okulNoTextField.text = ""
                     self.sifreTextField.text = ""
                     
+
                     
                     if self.defaults.string(forKey: "hash") == self.loginHash {
                         
+                        self.stopAnimating()
                         self.goToMainPage()
                     
                         }
@@ -117,6 +126,9 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable{
                         
                         self.errorAlert.addAction(self.action)
                         
+                        
+                        self.stopAnimating()
+
                         self.present(self.errorAlert, animated: true, completion: nil)
                         
                         }
@@ -134,6 +146,8 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable{
                 self.action = UIAlertAction(title: "Tamam", style: .default, handler: nil)
                 
                 self.errorAlert.addAction(self.action)
+
+                self.stopAnimating()
                 
                 self.present(self.errorAlert, animated: true, completion: nil)
                 }

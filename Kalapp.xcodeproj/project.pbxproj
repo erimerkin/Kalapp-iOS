@@ -22,6 +22,7 @@
 		13D7EB602021EFB800B4470C /* AnketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D7EB5F2021EFB800B4470C /* AnketViewController.swift */; };
 		13D7EB622021EFC800B4470C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D7EB612021EFC800B4470C /* SettingsViewController.swift */; };
 		13D7EB642021F5ED00B4470C /* Duyuru.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D7EB632021F5ED00B4470C /* Duyuru.swift */; };
+		48016EA520359A20000AC5D1 /* Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48016EA420359A20000AC5D1 /* Shadow.swift */; };
 		485DE6802032CDF300D2A401 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485DE67F2032CDF300D2A401 /* Networking.swift */; };
 		BF17E45FCFAD005003FD986D /* Pods_KalappUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FA1582E8012312C825938AF /* Pods_KalappUITests.framework */; };
 		D84C9E987DE5958097F58B42 /* Pods_Kalapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F445673C377B151FEF4DCF7 /* Pods_Kalapp.framework */; };
@@ -68,6 +69,7 @@
 		13D7EB5F2021EFB800B4470C /* AnketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnketViewController.swift; sourceTree = "<group>"; };
 		13D7EB612021EFC800B4470C /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		13D7EB632021F5ED00B4470C /* Duyuru.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Duyuru.swift; sourceTree = "<group>"; };
+		48016EA420359A20000AC5D1 /* Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shadow.swift; sourceTree = "<group>"; };
 		485DE67F2032CDF300D2A401 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		4BDAFC78226F57FD732BB6F2 /* Pods-KalappUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KalappUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KalappUITests/Pods-KalappUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		52C6559EE9E3119000C1BCD9 /* Pods-Kalapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kalapp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kalapp/Pods-Kalapp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 				1393F56C20265F910072303B /* UserDetails.swift */,
 				1393F56E202672E00072303B /* Anket.swift */,
 				485DE67F2032CDF300D2A401 /* Networking.swift */,
+				48016EA420359A20000AC5D1 /* Shadow.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -545,6 +548,7 @@
 				1393F56D20265F910072303B /* UserDetails.swift in Sources */,
 				13D7EB5C2021EF3300B4470C /* ProfileViewController.swift in Sources */,
 				1393F56F202672E00072303B /* Anket.swift in Sources */,
+				48016EA520359A20000AC5D1 /* Shadow.swift in Sources */,
 				1341ECF720249C8F0013B615 /* LoginViewController.swift in Sources */,
 				1326D9742020C3A9007BB83A /* AppDelegate.swift in Sources */,
 			);

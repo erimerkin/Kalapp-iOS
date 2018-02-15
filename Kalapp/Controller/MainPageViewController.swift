@@ -18,6 +18,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
 
     @IBOutlet weak var duyuruTableView: UITableView!
     
+    
     var duyuruArray = [Duyuru]()
     let frbToken = 1
     let keychain = KeychainSwift(keyPrefix: "user_")
@@ -28,17 +29,21 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     var autoLoggedIn = false
     var errorAlert = UIAlertController()
     var action = UIAlertAction()
-    
+    let titleColor = UIColor.flatForestGreenColorDark()
+    let userColor = UIColor.flatForestGreen()
+
     
     //MARK: - Pull-to-Refresh
-    
+
+    let refreshControl = UIRefreshControl()
+
     lazy var refresh: UIRefreshControl = {
         let refresh = UIRefreshControl()
         refresh.addTarget(self, action:
             #selector(MainPageViewController.handleRefresh(_:)),
                                  for: UIControlEvents.valueChanged)
-        refresh.tintColor = UIColor.red
-        
+        refresh.tintColor = UIColor.white
+
         return refresh
     }()
     
@@ -47,7 +52,6 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
 
         retrieveData(index: duyuruArray.count)
         print("view did appear")
@@ -55,8 +59,21 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         
         duyuruTableView.delegate = self
         duyuruTableView.dataSource = self
-        self.duyuruTableView.addSubview(self.refresh)
-        refresh.beginRefreshing()
+
+        
+        if #available(iOS 10.0, *) {
+            refreshControl.tintColor = UIColor.flatWhite()
+            refreshControl.addTarget(self, action: #selector(MainPageViewController().handleRefresh(_:)), for: UIControlEvents.valueChanged)
+            duyuruTableView.refreshControl = refreshControl
+//            refreshControl.beginRefreshing()
+        } else {
+            print("hm")
+//            self.duyuruTableView.addSubview(self.refresh)
+//            refresh.beginRefreshing()
+            
+        }
+        
+
        
 }
 
@@ -74,10 +91,13 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     //TODO: - Retrieve Duyuru Page
     func retrieveData(index: Int){
         
+        if #available(iOS 10.0, *) {
+
         
         //CHECKING IF INTERNET CONNECTION IS ACTIVE:
         if Connectivity.isConnectedToInternet {
         
+            
             var params : [String : Any] = [:]
             params["s"] = index
             params["f"] = index + 5
@@ -128,18 +148,25 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                                 }
                                 
                                 
-                                if self.refresh.isRefreshing {
-                                    self.refresh.endRefreshing()
-                                }
+
                                 
                                 self.duyuruArray.append(duyuru)
-                                self.duyuruTableView.reloadData()
                                 
+                                if i == responseJSON.arrayValue.count - 1 {
+                                    if self.refreshControl.isRefreshing == true {
+                                    self.refreshControl.endRefreshing()
+                                    }
+                                }
+                                
+                                
+                                self.duyuruTableView.reloadData()
+                                print("data received successfully")
                             }
                                 
                         //DATA IS FINISHED
                             else {
                                 self.isDataFinished = true
+                                print("data is finished")
                             }
                            
                             }
@@ -157,13 +184,14 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                         //ERROR HASHLA ALAKALI DEĞİL(CONNECTION VS.)
                                 else {
                                     print(stringResponse.result.error!)
-                                            
-                                        self.refresh.endRefreshing()
-                                    
+                                    if self.refreshControl.isRefreshing == true {
+                                        self.refreshControl.endRefreshing()
+                                    }
                                 }
                     }
                 }
             }
+
         }
             
             // IF THERE IS NO INTERNET CONNECTION:
@@ -187,6 +215,12 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
 
                 
             }
+            
+            
+        }
+        else {
+            print("boop")// Fallback on earlier versions
+        }
     }
     
     /////////////////////////////////////////////////
@@ -200,46 +234,83 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         //CHECK IF IT IS LAST ROW
         if indexPath.section == duyuruArray.count - 1 { retrieveData(index: duyuruArray.count)}
         
-        let cell = duyuruTableView.dequeueReusableCell(withIdentifier: "customDuyuruTableViewCell", for: indexPath) as! DuyuruTableViewCell
-        
+        duyuruTableView.reloadSections(NSIndexSet(index: indexPath.section) as IndexSet, with: UITableViewRowAnimation.fade)
+
         //CHECK IF WE GOT ENOUGH DATA FROM API TO DISPLAY CELLS
         if duyuruArray.count != 0 {
 
             
-            cell.userNameLabel.text = duyuruArray[indexPath.section].userName
-            // cell.contentDate.text = duyuruArray[indexPath.section].postDate
-            cell.titleLabel.text = duyuruArray[indexPath.section].postTitle
-            cell.contentLabel.text = duyuruArray[indexPath.section].postTitle
-        
-            
-            
-            cell.userImageView.layer.cornerRadius = 24
-            cell.userImageView.layer.masksToBounds = true
-        
-            cell.cellView.layer.cornerRadius = 12
-            cell.userImageView.layer.masksToBounds = true
-            
             //CHECK IF THE CELL SHOULD HAVE A IMAGE
             if duyuruArray[indexPath.section].contentImg != "nil" && duyuruArray[indexPath.section].isThereImage == true {
 
-                cell.contentImageView.isHidden = false
+                let imagedCell = duyuruTableView.dequeueReusableCell(withIdentifier: "customDuyuruTableViewCell", for: indexPath) as! DuyuruTableViewCell
+                
+                imagedCell.userNameLabel.textColor = userColor
+                imagedCell.titleLabel.textColor = titleColor
+                
+                imagedCell.userNameLabel.text = duyuruArray[indexPath.section].userName
+                // cell.contentDate.text = duyuruArray[indexPath.section].postDate
+                imagedCell.titleLabel.text = duyuruArray[indexPath.section].postTitle
+                imagedCell.contentLabel.text = duyuruArray[indexPath.section].postTitle
+                
+                
+                imagedCell.userImageView.layer.cornerRadius = 24
+                imagedCell.userImageView.layer.masksToBounds = true
+                
+                imagedCell.cellView.layer.cornerRadius = 12
+                imagedCell.cellView.layer.masksToBounds = true
+                
                 
 //                getImage(url: duyuruArray[indexPath.section].contentImg, imageView: cell.contentImageView, path: indexPath.section)
                 
-                cell.contentImageView.af_setImage(withURL: URL(string: duyuruArray[indexPath.section].contentImg)!, placeholderImage: UIImage(named: "profiledefault.png"), filter: AspectScaledToFitSizeFilter(size: cell.contentImageView.frame.size), imageTransition: UIImageView.ImageTransition.crossDissolve(0.5), runImageTransitionIfCached: false){
+                imagedCell.contentImageView.af_setImage(withURL: URL(string: duyuruArray[indexPath.section].contentImg)!, placeholderImage: UIImage(named: "profileDefault.png"), imageTransition: UIImageView.ImageTransition.crossDissolve(0.5), runImageTransitionIfCached: false){
                 
                         response in
                             // Check if the image isn't already cached
                             if response.response != nil {
+                                
                                 // Force the cell update
                                 self.duyuruTableView.beginUpdates()
                                 self.duyuruTableView.endUpdates()
                 
                         }
                     }
+                
+                configureTableView()
+                
+                return imagedCell
             }
             else{
-                cell.contentImageView.isHidden = true
+                
+                let cell = duyuruTableView.dequeueReusableCell(withIdentifier: "customImagedDuyuruTableViewCell", for: indexPath) as! DuyuruTableViewCell
+                
+                cell.userNameLabel.textColor = userColor
+                cell.titleLabel.textColor = titleColor
+                
+                cell.userNameLabel.text = duyuruArray[indexPath.section].userName
+                // cell.contentDate.text = duyuruArray[indexPath.section].postDate
+                cell.titleLabel.text = duyuruArray[indexPath.section].postTitle
+                cell.contentLabel.text = duyuruArray[indexPath.section].postTitle
+            
+                
+                cell.userImageView.layer.cornerRadius = 24
+                cell.userImageView.layer.masksToBounds = true
+                
+                cell.cellView.layer.cornerRadius = 12
+                cell.cellView.layer.masksToBounds = true
+                
+                cell.cellView.layer.shadowOffset = CGSize(width: 1, height: 1)
+                cell.cellView.layer.shadowColor = UIColor.flatBlack().cgColor
+                cell.cellView.layer.shadowRadius = 4
+                cell.cellView.layer.shadowOpacity = 0.25
+                cell.cellView.layer.masksToBounds = true;
+                cell.cellView.clipsToBounds = true;
+                
+                
+                configureTableView()
+                
+                return cell
+            
             }
             
             
@@ -247,15 +318,18 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
             
         //IF THERE IS NOT ENOUGH DATA TRY AGAIN
         else {
+                let cell = UITableViewCell()
+            
                 self.retrieveData(index: duyuruArray.count)
             
+            
+                configureTableView()
+            
+                return cell
+            
         }
-        
-        
-            configureTableView()
 
-            return cell
-       
+    
     }
     
     
@@ -271,27 +345,34 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         return 1
     }
     
-    //MARK: - FOOTER CREATION AND SPECS
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        
-        let view:UIView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: self.view.bounds.size.width, height: 4))
-        view.backgroundColor = .flatWhite()
-        
-        return view
-    }
+//    //MARK: - FOOTER CREATION AND SPECS
+//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+//        
+//        let view:UIView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: self.view.bounds.size.width, height: 4))
+//        view.backgroundColor = .white
+//        
+//        return view
+//    }
+    
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        let view:UIView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: self.view.bounds.size.width, height: 2))
+//        view.backgroundColor = .white
+//        
+//        return view
+//    }
     
     
-    //MARK: - FOOTER HEIGHT
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 8
-    }
-    
+//    //MARK: - FOOTER HEIGHT
+//    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+//        return 4
+//    }
+//
     
     //MARK: - AUTO-RESIZE
     func configureTableView() {
         
         duyuruTableView.rowHeight = UITableViewAutomaticDimension
-        duyuruTableView.estimatedRowHeight = 300
+
     }
     
     
@@ -309,8 +390,16 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
         
+        var time = 0
+        
         duyuruArray.removeAll()
-        retrieveData(index: duyuruArray.count)
+        while time <= 5 {
+            time += 1
+            if time == 5 {
+                retrieveData(index: duyuruArray.count)
+            }
+        }
+
         
     }
 
@@ -364,7 +453,9 @@ class DuyuruTableViewCell : UITableViewCell {
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var cellView: UIView!
     @IBOutlet weak var contentImageView: UIImageView!
-    
+    @IBOutlet weak var shadowLayer: ShadowView!
+
     
 }
+
 

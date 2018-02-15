@@ -8,13 +8,12 @@
 
 import Foundation
 
-class Duyuru {
+struct Duyuru {
     var userImgURL = ""
     var userName = ""
     var postDate = ""
     var postTitle = ""
     var postText = ""
-    var contentImg = ""
     var contentImgURL = ""
     var postId : Int = 0
     var isThereImage = false

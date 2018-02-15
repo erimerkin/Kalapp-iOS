@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import ChameleonFramework
 
 protocol SettingsDelegate {
     func reloadPage(result: Bool)
@@ -49,6 +50,8 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    
+        view.backgroundColor = .flatWhite()
     }
 
 

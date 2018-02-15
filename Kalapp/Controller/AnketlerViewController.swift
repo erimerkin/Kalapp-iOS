@@ -62,6 +62,7 @@ class AnketlerViewController: UIViewController, UITableViewDelegate, UITableView
                 let anketJSON : JSON = JSON(response.result.value!)
                 print(anketJSON)
                 
+                if anketJSON["valid"].isEmpty {
                 for i in 0...(anketJSON.arrayValue.count - 1) {
                     
                     let anket = Anket()
@@ -83,6 +84,10 @@ class AnketlerViewController: UIViewController, UITableViewDelegate, UITableView
                        
 
                     }
+                }
+            }
+                else {
+                    print("request is not valid")
                 }
             }
             else {
@@ -121,15 +126,15 @@ class AnketlerViewController: UIViewController, UITableViewDelegate, UITableView
         
 
         
-        if anketArray[indexPath.section].anketIsVoted == 1 {
-            cell.accessoryType = .checkmark
-            cell.indicatorLabel.text = "SONUÇ"
-
-        }
-        else {
-            cell.accessoryType = .disclosureIndicator
-            cell.indicatorLabel.text = "KATIL"
-        }
+//        if anketArray[indexPath.section].anketIsVoted == 1 {
+//            cell.accessoryType = .checkmark
+//            cell.indicatorLabel.text = "SONUÇ"
+//
+//        }
+//        else {
+//            cell.accessoryType = .disclosureIndicator
+//            cell.indicatorLabel.text = "KATIL"
+//        }
         }
         
         else {
@@ -200,6 +205,12 @@ class AnketlerViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     
+    //MARK: - STOP REFRESH
+    func stopRefresh() {
+    if self.refresh.isRefreshing == true {
+    self.refresh.endRefreshing()
+    }
+    }
 }
 
 class AnketTableViewCell : UITableViewCell {
