@@ -30,6 +30,7 @@ extension UIViewController
     }
 }
 
+
 class LoginViewController: UIViewController, NVActivityIndicatorViewable{
 
     let keychain = KeychainSwift(keyPrefix: "user_")
@@ -37,6 +38,8 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable{
     var loginHash = ""
     var errorAlert = UIAlertController()
     var action = UIAlertAction()
+    let borderBir = CALayer()
+    var borderIki = CALayer()
 
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var okulNoTextField: UITextField!
@@ -53,6 +56,11 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable{
         loginButton.layer.masksToBounds = true
         
         // Do any additional setup after loading the view.
+//        okulNoTextField.layer.addSublayer(borderBir)
+//        sifreTextField.layer.addSublayer(borderIki)
+//    
+//        updateBorder(border: borderBir, textField: okulNoTextField, color: UIColor.white, width: 2.0)
+//        updateBorder(border: borderIki, textField: sifreTextField, color: UIColor.white, width: 2.0)
     }
 
     override func didReceiveMemoryWarning() {
@@ -60,7 +68,10 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable{
         // Dispose of any resources that can be recreated.
     }
     
-
+    func updateBorder(border: CALayer, textField: UITextField, color: UIColor, width: CGFloat){
+        border.backgroundColor = color.cgColor
+        border.frame = CGRect(x: 0.0, y: textField.frame.size.height - width, width: textField.frame.size.width, height: width);
+    }
 
     
     //TODO: - Login

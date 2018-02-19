@@ -15,3 +15,5 @@ class Connectivity {
         return NetworkReachabilityManager()!.isReachable
     }
 }
+
+

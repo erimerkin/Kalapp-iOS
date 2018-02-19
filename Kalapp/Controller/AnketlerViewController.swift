@@ -62,7 +62,7 @@ class AnketlerViewController: UIViewController, UITableViewDelegate, UITableView
                 let anketJSON : JSON = JSON(response.result.value!)
                 print(anketJSON)
                 
-                if anketJSON["valid"].isEmpty {
+                if anketJSON["valid"].isEmpty == true {
                 for i in 0...(anketJSON.arrayValue.count - 1) {
                     
                     let anket = Anket()
@@ -88,6 +88,8 @@ class AnketlerViewController: UIViewController, UITableViewDelegate, UITableView
             }
                 else {
                     print("request is not valid")
+                    
+                    
                 }
             }
             else {
@@ -119,22 +121,27 @@ class AnketlerViewController: UIViewController, UITableViewDelegate, UITableView
         
         if anketArray.count != 0 {
         
+        cell.anketContentView.layer.cornerRadius = 12
+        cell.anketContentView.layer.masksToBounds = true
+            
         cell.titleLabel.text = anketArray[indexPath.section].anketTitle
 //        cell.timeLabel.text = anketArray[indexPath.section].anketDate
         cell.userLabel.text = anketArray[indexPath.section].anketYazar
-        cell.anketImageView.sd_setImage(with: URL(string: anketArray[indexPath.section].anketImg), placeholderImage: UIImage(named: "profileDefault.png"))
+
+            cell.anketImageView.layer.cornerRadius = 24
+            cell.anketImageView.layer.masksToBounds = true
         
 
         
-//        if anketArray[indexPath.section].anketIsVoted == 1 {
-//            cell.accessoryType = .checkmark
-//            cell.indicatorLabel.text = "SONUÇ"
-//
-//        }
-//        else {
-//            cell.accessoryType = .disclosureIndicator
-//            cell.indicatorLabel.text = "KATIL"
-//        }
+        if anketArray[indexPath.section].anketIsVoted == 1 {
+            cell.titleLabel.textColor = UIColor.flatGrayColorDark()
+            cell.userLabel.textColor = UIColor.flatGrayColorDark()
+            cell.anketContentView.backgroundColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 0.6)
+            cell.shadowView.lowShadow()
+        }
+        else {
+            cell.shadowView.setupShadow()
+        }
         }
         
         else {
@@ -149,17 +156,17 @@ class AnketlerViewController: UIViewController, UITableViewDelegate, UITableView
         return anketArray.count
     }
     
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        
-        let view:UIView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: self.view.bounds.size.width, height: 4))
-        view.backgroundColor = .flatWhite()
-        
-        return view
-    }
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 8
-    }
+//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+//
+//        let view:UIView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: self.view.bounds.size.width, height: 4))
+//        view.backgroundColor = nil
+//
+//        return view
+//    }
+//
+//    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+//        return 8
+//    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
@@ -213,7 +220,7 @@ class AnketlerViewController: UIViewController, UITableViewDelegate, UITableView
     }
 }
 
-class AnketTableViewCell : UITableViewCell {
+class AnketTableViewCell: UITableViewCell {
     
     
     @IBOutlet weak var anketContentView: UIView!
@@ -223,5 +230,6 @@ class AnketTableViewCell : UITableViewCell {
     @IBOutlet weak var userLabel: UILabel!
     @IBOutlet weak var indicatorLabel: UILabel!
     
+    @IBOutlet weak var shadowView: ShadowView!
     
 }

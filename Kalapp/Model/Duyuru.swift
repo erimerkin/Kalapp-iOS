@@ -14,7 +14,7 @@ struct Duyuru {
     var postDate = ""
     var postTitle = ""
     var postText = ""
-    var contentImgURL = ""
+    var contentImg = ""
     var postId : Int = 0
     var isThereImage = false
 }
