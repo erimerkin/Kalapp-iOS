@@ -85,7 +85,7 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable{
         loginCred["pass"] = password
         loginCred["fcms_token"] = "1"
         
-        Alamofire.request("http://kalapp.kalfest.com/?action=login", method: .get, parameters: loginCred).responseJSON {
+        Alamofire.request("http://207.154.249.115/?action=login", method: .get, parameters: loginCred).responseJSON {
             response in
             if response.result.isSuccess {
                 

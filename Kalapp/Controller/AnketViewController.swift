@@ -56,7 +56,7 @@ class AnketViewController: UIViewController, WKUIDelegate {
         
         self.title = postTitle
                 
-        let myURL = URL(string: "http://kalapp.kalfest.com/?action=anket&do=anket_getir&hash=\(loginHash!)&id=\(postId)")
+        let myURL = URL(string: "http://207.154.249.115/?action=anket&do=anket_getir&hash=\(loginHash!)&id=\(postId)")
         let myRequest = URLRequest(url: myURL!)
         webView.load(myRequest)
         webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: &myContext)

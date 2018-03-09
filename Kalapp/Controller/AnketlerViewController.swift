@@ -56,13 +56,13 @@ class AnketlerViewController: UIViewController, UITableViewDelegate, UITableView
         params["s"] = String(index)
         params["f"] = String(index + 5)
         
-        Alamofire.request("http://kalapp.kalfest.com/?action=anket&do=anketleri_getir", method: .get, parameters: params).responseJSON { response in
+        Alamofire.request("http://207.154.249.115/?action=anket&do=anketleri_getir", method: .get, parameters: params).responseJSON { response in
             
             if response.result.isSuccess {
                 let anketJSON : JSON = JSON(response.result.value!)
                 print(anketJSON)
                 
-                if anketJSON["valid"].isEmpty == true {
+                if anketJSON["valid"] != false {
                 for i in 0...(anketJSON.arrayValue.count - 1) {
                     
                     let anket = Anket()
@@ -78,11 +78,14 @@ class AnketlerViewController: UIViewController, UITableViewDelegate, UITableView
                     if self.refresh.isRefreshing == true {
                             self.refresh.endRefreshing()
                     }
-                        
-                    self.anketArray.append(anket)
-                    self.anketTableView.reloadData()
-                       
-
+                     
+                        if anket.anketIsVoted == 1 {
+                            self.anketArray.insert(anket, at: 0)
+                            self.anketTableView.reloadData()
+                        } else {
+                            self.anketArray.append(anket)
+                            self.anketTableView.reloadData()
+                        }
                     }
                 }
             }
@@ -108,7 +111,8 @@ class AnketlerViewController: UIViewController, UITableViewDelegate, UITableView
     
     //TODO: - Row sayısı
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return anketArray.count
+        
     }
     
     
@@ -120,23 +124,24 @@ class AnketlerViewController: UIViewController, UITableViewDelegate, UITableView
         let cell = anketTableView.dequeueReusableCell(withIdentifier: "customAnketTableViewCell", for: indexPath) as! AnketTableViewCell
         
         if anketArray.count != 0 {
-        
+        let path = indexPath.row
         cell.anketContentView.layer.cornerRadius = 12
         cell.anketContentView.layer.masksToBounds = true
             
-        cell.titleLabel.text = anketArray[indexPath.section].anketTitle
+        cell.titleLabel.text = anketArray[path].anketTitle
 //        cell.timeLabel.text = anketArray[indexPath.section].anketDate
-        cell.userLabel.text = anketArray[indexPath.section].anketYazar
+        cell.userLabel.text = anketArray[path].anketYazar
 
             cell.anketImageView.layer.cornerRadius = 24
             cell.anketImageView.layer.masksToBounds = true
         
 
         
-        if anketArray[indexPath.section].anketIsVoted == 1 {
-            cell.titleLabel.textColor = UIColor.flatGrayColorDark()
-            cell.userLabel.textColor = UIColor.flatGrayColorDark()
-            cell.anketContentView.backgroundColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 0.6)
+        if anketArray[path].anketIsVoted == 1 {
+            let textColour = #colorLiteral(red: 0.370555222, green: 0.3705646992, blue: 0.3705595732, alpha: 1)
+            cell.titleLabel.textColor = textColour
+            cell.userLabel.textColor = textColour
+            cell.anketContentView.backgroundColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 0.6005725599)
             cell.shadowView.lowShadow()
         }
         else {
@@ -153,7 +158,7 @@ class AnketlerViewController: UIViewController, UITableViewDelegate, UITableView
 
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return anketArray.count
+        return 1
     }
     
 //    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -172,8 +177,8 @@ class AnketlerViewController: UIViewController, UITableViewDelegate, UITableView
 
         print("test")
         
-        currentAnketId = anketArray[indexPath.section].anketId
-        currentAnketTitle = anketArray[indexPath.section].anketTitle
+        currentAnketId = anketArray[indexPath.row].anketId
+        currentAnketTitle = anketArray[indexPath.row].anketTitle
 
         anketTableView.deselectRow(at: indexPath, animated: true)
         

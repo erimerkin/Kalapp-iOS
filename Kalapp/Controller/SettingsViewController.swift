@@ -139,6 +139,7 @@ class SettingsViewController: UIViewController {
     
     @IBAction func logoutButtonPressed(_ sender: UIButton) {
         logout()
+        dismiss(animated: true, completion: nil)
         performSegue(withIdentifier: "unwindToLogin", sender: self)
     }
     

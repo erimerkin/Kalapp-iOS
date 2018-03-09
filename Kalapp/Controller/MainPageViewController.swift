@@ -18,19 +18,28 @@ import AlamofireImage
 class MainPageViewController: UITableViewController {
 
     @IBOutlet weak var duyuruTableView: UITableView!
+    @IBOutlet weak var refresher: UIRefreshControl!
     
-    
+    //DETAILS FOR CONNECTION
     var duyuruArray = [Duyuru]()
     let frbToken = 1
     let keychain = KeychainSwift(keyPrefix: "user_")
     var userHash = ""
-    var isDataFinished = false
     var hashHash = ""
+    
+    //CHECKING VALUES
+    var isDataFinished = false
     var failure = false
     var autoLoggedIn = false
+    var isRefreshing = false
+    var isShowingError = false
+    
+    //INIT
     var errorAlert = UIAlertController()
     var action = UIAlertAction()
-    var isRefreshing = false
+    var alert = AlertCreation()
+    var alertView = ErrorPopup()
+    var errorLabel = ErrorLabel()
     
     //MARK: - Pull-to-Refresh
 
@@ -45,7 +54,7 @@ class MainPageViewController: UITableViewController {
         retrieveData(index: duyuruArray.count)
         print("view did appear")
         
-        refreshControl?.tintColor = UIColor.flatWhite()
+        refresher.tintColor = UIColor.flatWhite()
         
 
        
@@ -60,6 +69,8 @@ class MainPageViewController: UITableViewController {
 
     ///////////////////////////////////////////////////////////////////////////
     //MARK: - Network
+    
+    
 
    
     //TODO: - Retrieve Duyuru Page
@@ -82,13 +93,16 @@ class MainPageViewController: UITableViewController {
             else {
                 goToLogin()
             }
-
+            
+            alertView.removeFromSuperview()
             
 
-            Alamofire.request("http://kalapp.kalfest.com/?action=duyuru", method: .get, parameters: params).responseJSON
+            Alamofire.request("http://207.154.249.115/?action=duyuru", method: .get, parameters: params).responseJSON
                 { response in
                         if response.result.isSuccess {
                             let responseJSON : JSON = JSON(response.result.value!)
+                            
+                            let count = self.duyuruArray.count + responseJSON.arrayValue.count
                             
                          for i in 0...(responseJSON.arrayValue.count - 1) {
                                 var duyuru = Duyuru()
@@ -118,27 +132,32 @@ class MainPageViewController: UITableViewController {
                                     duyuru.isThereImage = true
                                 }
                                 
-                                
-
-                                
                                 self.duyuruArray.append(duyuru)
 
                                     print("data received successfully")
-                                    
-                                    
-
-                                    
-                                if self.refreshControl?.isRefreshing == true {
-                                    self.refreshControl?.endRefreshing()
-                                    self.isRefreshing = false
-    
-                                }
-                                self.duyuruTableView.reloadData()
                                 
-                            }
+                                
+                                if self.duyuruArray.count == count {
+                                    
+                                    
+                                    self.duyuruTableView.reloadData()
+
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                        if self.refresher.isRefreshing == true {
+                                        self.refresher.endRefreshing()
+                                        self.isRefreshing = false
+                                        }
+                                        }
+                                    }
+                                }
                                 
                         //DATA IS FINISHED
                             else {
+                                if self.refresher.isRefreshing == true {
+                                    self.isRefreshing = false
+                                    self.refresher.endRefreshing()
+                                }
+                                
                                 self.isDataFinished = true
                                 print("data is finished")
                             }
@@ -151,24 +170,25 @@ class MainPageViewController: UITableViewController {
                                 if stringResponse.result.isSuccess {
                                     if stringResponse.result.value! == "You are not allowed to access this page!" {
                                         
-                                        if self.refreshControl?.isRefreshing == true {
-                                            self.refreshControl?.endRefreshing()
+                                        if self.refresher.isRefreshing == true {
+                                            self.refresher.endRefreshing()
+                                            self.isRefreshing = false
                                         }
-                                            self.goToLogin()
+                                        
+                                        self.alert.popupAlert(errorMessage: "Oturumunuzda bir sorun oluştu, devam etmek için lütfen giriş yapın.", button: "Giriş Yap", VC: self, completion: self.goToLogin())
                                         
                                         }
                                     }
                         //ERROR HASHLA ALAKALI DEĞİL(CONNECTION VS.)
                                 else {
                                     print(stringResponse.result.error!)
-                                    if self.refreshControl?.isRefreshing == true {
-                                        self.refreshControl?.endRefreshing()
-                                        
-                                        let errorLabel = ErrorLabel()
-                                        
-                                        errorLabel.initializeLabel(content: "Bağlantı Hatası")
-                                        self.view.addSubview(errorLabel)
+                                    if self.refresher.isRefreshing == true {
+                                        self.refresher.endRefreshing()
+                                        self.isRefreshing = false
                                     }
+                                    
+                                    self.alertCreate(errorMessage: "Sunuculara bağlanmada sorun yaşandı.")
+
                                 }
                     }
                 }
@@ -181,9 +201,10 @@ class MainPageViewController: UITableViewController {
             else {
                 print("no connection")
             
-            if refreshControl?.isRefreshing == true {
+            if refresher.isRefreshing == true {
                 
-                refreshControl?.endRefreshing()
+                refresher.endRefreshing()
+                isRefreshing = false
                 
                 }
             
@@ -195,12 +216,10 @@ class MainPageViewController: UITableViewController {
 //
 //                self.present(self.errorAlert, animated: true, completion: nil)
             
-            let errorLabel = ErrorLabel()
-            
-            errorLabel.initializeLabel(content: "Connection Error")
-            view.addSubview(errorLabel)
+            alertCreate(errorMessage: "Bağlantı yok, lütfen internet bağlantınızı açın.")
 
-                
+//            self.popupAlert(errorMessage: "İnternete bağlı değilsiniz.", button: "Tamam", completion: nil)
+            
             }
     }
     
@@ -361,7 +380,6 @@ class MainPageViewController: UITableViewController {
     /////////////////////////////////////////////////////////////////////////////////
     
     
-    
     //MARK: - LOGIN SEGUE
     
     func goToLogin(){
@@ -418,15 +436,58 @@ class MainPageViewController: UITableViewController {
     @IBAction func refreshControl(_ sender: UIRefreshControl) {
         
         if isRefreshing == false {
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 ) {
+                
+                self.refreshSelector()
+                
+            }
+
+        } else {
+            
+            refresher.endRefreshing()
+        
+        }
+        
+    }
+    
+    func refreshSelector() {
+        
+        errorLabel.removeFromSuperview()
+        alertView.removeFromSuperview()
         duyuruArray.removeAll()
-        duyuruTableView.reloadData()
+        
         if duyuruArray.count == 0 {
-        isRefreshing = true
-        retrieveData(index: duyuruArray.count)
+            isRefreshing = true
+            retrieveData(index: duyuruArray.count)
         }
     }
+    
+    //MARK: - ERROR LABEL CREATION
+    
+    func alertCreate(errorMessage: String) {
+        
+        if alert.isShowing() == false {
+        if self.duyuruArray.isEmpty == true {
+            
+            errorLabel.removeFromSuperview()
+            alert.animateAlert(errorMessage: errorMessage, VC: self)
+            errorLabel = alert.backgroundError(errorMessage: errorMessage, VC: self)
+
+        } else {
+            
+            errorLabel.removeFromSuperview()
+            alert.animateAlert(errorMessage: errorMessage, VC: self)
+            
+            }
+        }
+            
     }
-    }
+    
+
+    
+//END OF CLASS
+}
 
 
 //MARK: - CELL SPECS
