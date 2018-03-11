@@ -837,7 +837,6 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="yiz-Nv-o3h" firstAttribute="top" secondItem="9yd-t8-SJU" secondAttribute="top" id="DC7-A9-y4O"/>
                             <constraint firstItem="yiz-Nv-o3h" firstAttribute="bottom" secondItem="9yd-t8-SJU" secondAttribute="bottom" id="EVU-tp-78U"/>
