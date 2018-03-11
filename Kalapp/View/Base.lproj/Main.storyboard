@@ -525,7 +525,7 @@
                                                     <rect key="frame" x="9.6666666666666572" y="109" width="379" height="200"/>
                                                 </imageView>
                                             </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstItem="674-XJ-SrE" firstAttribute="top" secondItem="Bec-8u-5eG" secondAttribute="top" constant="8" id="3Jz-Co-ppz"/>
                                                 <constraint firstAttribute="trailing" secondItem="tFe-Q7-1H1" secondAttribute="trailing" constant="15" id="4Ss-fU-iWg"/>
