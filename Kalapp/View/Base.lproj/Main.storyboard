@@ -545,7 +545,6 @@
                                             </constraints>
                                         </view>
                                     </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="Bec-8u-5eG" secondAttribute="bottom" constant="11" id="8QJ-M3-zUI"/>
                                         <constraint firstItem="6lc-eN-4ib" firstAttribute="top" secondItem="UHU-MD-2Ne" secondAttribute="top" constant="6" id="GO7-r5-OO3"/>
@@ -652,7 +651,6 @@
                                             </constraints>
                                         </view>
                                     </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="ZKY-Mt-bRx" firstAttribute="top" secondItem="f9p-iX-FHA" secondAttribute="top" constant="11" id="6n1-Ds-Hkk"/>
                                         <constraint firstItem="Icf-Mw-LYW" firstAttribute="top" secondItem="f9p-iX-FHA" secondAttribute="top" constant="5" id="IB5-fv-aYX"/>
