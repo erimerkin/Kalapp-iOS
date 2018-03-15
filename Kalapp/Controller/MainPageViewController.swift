@@ -26,6 +26,8 @@ class MainPageViewController: UITableViewController {
     let keychain = KeychainSwift(keyPrefix: "user_")
     var userHash = ""
     var hashHash = ""
+	let adress = "http://kadikoyanadoluapp.com"
+    
     
     //CHECKING VALUES
     var isDataFinished = false
@@ -40,7 +42,8 @@ class MainPageViewController: UITableViewController {
     var alert = AlertCreation()
     var alertView = ErrorPopup()
     var errorLabel = ErrorLabel()
-    
+    let activity = UIActivityIndicatorView()
+        
     //MARK: - Pull-to-Refresh
 
 
@@ -55,8 +58,14 @@ class MainPageViewController: UITableViewController {
         print("view did appear")
         
         refresher.tintColor = UIColor.flatWhite()
+        duyuruTableView.addSubview(refresher)
         
-
+        
+        activity.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        activity.activityIndicatorViewStyle = .gray
+        activity.center = CGPoint(x: self.view.frame.size.width / 2, y: self.view.frame.size.height / 2 - 100)
+        self.view.addSubview(activity)
+        activity.startAnimating()
        
 }
 
@@ -97,15 +106,17 @@ class MainPageViewController: UITableViewController {
             alertView.removeFromSuperview()
             
 
-            Alamofire.request("http://207.154.249.115/?action=duyuru", method: .get, parameters: params).responseJSON
+            Alamofire.request("\(adress)/?action=duyuru", method: .get, parameters: params).responseJSON
                 { response in
                         if response.result.isSuccess {
                             let responseJSON : JSON = JSON(response.result.value!)
-                            
-                            let count = self.duyuruArray.count + responseJSON.arrayValue.count
+
+							var count = responseJSON.arrayValue.count
                             
                          for i in 0...(responseJSON.arrayValue.count - 1) {
                                 var duyuru = Duyuru()
+							
+
                             print(i)
                         // CHECKING IF THE JSON/POST IS VALID
                             if responseJSON[i]["id"].intValue != 0 {
@@ -135,64 +146,54 @@ class MainPageViewController: UITableViewController {
                                 self.duyuruArray.append(duyuru)
 
                                     print("data received successfully")
-                                
-                                
-                                if self.duyuruArray.count == count {
-                                    
                                     
                                     self.duyuruTableView.reloadData()
+									self.endRefreshing()
 
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                        if self.refresher.isRefreshing == true {
-                                        self.refresher.endRefreshing()
-                                        self.isRefreshing = false
-                                        }
-                                        }
-                                    }
-                                }
+								
+                            }
                                 
                         //DATA IS FINISHED
                             else {
-                                if self.refresher.isRefreshing == true {
-                                    self.isRefreshing = false
-                                    self.refresher.endRefreshing()
-                                }
-                                
                                 self.isDataFinished = true
                                 print("data is finished")
+								self.endRefreshing()
+
+								
                             }
-                           
                             }
+							
+							
                     }
                         //ERROR ALINDIĞINDA SORUNUN HASHTE OLUP OLMADIĞI
                         else {
-                            Alamofire.request("http://kalapp.kalfest.com/?action=duyuru", method: .get, parameters: params).responseString  { stringResponse in
+							Alamofire.request("\(self.adress)/?action=duyuru", method: .get, parameters: params).responseString  { stringResponse in
                                 if stringResponse.result.isSuccess {
                                     if stringResponse.result.value! == "You are not allowed to access this page!" {
-                                        
-                                        if self.refresher.isRefreshing == true {
-                                            self.refresher.endRefreshing()
-                                            self.isRefreshing = false
-                                        }
-                                        
-                                        self.alert.popupAlert(errorMessage: "Oturumunuzda bir sorun oluştu, devam etmek için lütfen giriş yapın.", button: "Giriş Yap", VC: self, completion: self.goToLogin())
+										
+										print("hash")
+										self.endRefreshing()
+										
+                                        self.alert.popupAlert(errorMessage: "Oturumunuzda bir sorun oluştu, devam etmek için lütfen giriş yapın.", button: "Giriş Yap", VC: self.self, completion: self.goToLogin())
                                         
                                         }
                                     }
                         //ERROR HASHLA ALAKALI DEĞİL(CONNECTION VS.)
                                 else {
                                     print(stringResponse.result.error!)
-                                    if self.refresher.isRefreshing == true {
-                                        self.refresher.endRefreshing()
-                                        self.isRefreshing = false
-                                    }
-                                    
+
+									print("fatih")
+									
+									self.endRefreshing()
+									
                                     self.alertCreate(errorMessage: "Sunuculara bağlanmada sorun yaşandı.")
 
                                 }
                     }
                 }
-            }
+			
+
+			}
 
         }
             
@@ -201,13 +202,8 @@ class MainPageViewController: UITableViewController {
             else {
                 print("no connection")
             
-            if refresher.isRefreshing == true {
-                
-                refresher.endRefreshing()
-                isRefreshing = false
-                
-                }
-            
+				endRefreshing()
+			
 //                self.errorAlert = UIAlertController(title: "Hata", message: "connection error", preferredStyle: .alert)
 //
 //                self.action = UIAlertAction(title: "Tamam", style: .default, handler: nil)
@@ -231,7 +227,7 @@ class MainPageViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         //CHECK IF IT IS LAST ROW
-        if indexPath.section == duyuruArray.count - 1 { retrieveData(index: duyuruArray.count)}
+        if indexPath.section == duyuruArray.count - 1 && isRefreshing == false { retrieveData(index: duyuruArray.count)}
         
         let titleColor = UIColor.flatForestGreenColorDark()
         let userColor = UIColor.flatForestGreen()
@@ -263,20 +259,45 @@ class MainPageViewController: UITableViewController {
                 
 //
 //                getImage(url: duyuruArray[indexPath.section].contentImg, imageView: imagedCell.contentImageView, path: indexPath.section)
-                
-                imagedCell.contentImageView.af_setImage(withURL: URL(string: duyuruArray[indexPath.section].contentImg)!, placeholderImage: UIImage(named: "profileDefault.png"), filter: AspectScaledToFitSizeFilter(size: imagedCell.contentImageView.frame.size), imageTransition: UIImageView.ImageTransition.crossDissolve(0.5), runImageTransitionIfCached: false){
+				
+				imagedCell.contentImageView.af_setImage(withURL: URL(string: duyuruArray[indexPath.section].contentImg)!, placeholderImage: UIImage(named: "profileDefault.png"), filter: nil, imageTransition: UIImageView.ImageTransition.crossDissolve(0.5), runImageTransitionIfCached: false){
 
                         response in
                             // Check if the image isn't already cached
                             if response.response != nil {
                                 // Force the cell update
-                                
-                                self.duyuruTableView.beginUpdates()
-                                self.duyuruTableView.endUpdates()
+								
+								
+								imagedCell.contentImageView.image = ImageResize().resizeImage(image: response.value!, targetSize: self.self.view.bounds.size)
+						
+								self.duyuruTableView.beginUpdates()
+								self.duyuruTableView.endUpdates()
+								
+								let imageHeight = imagedCell.contentImageView.image?.size.height
+								
+								imagedCell.contentImageView.frame.size.height = imageHeight!
+								
+
 
                         }
                     }
-                
+				
+				imagedCell.userImageView.af_setImage(withURL: URL(string: duyuruArray[indexPath.section].userImgURL)!, placeholderImage: UIImage(named: "profileDefault.png"), filter: nil, imageTransition: UIImageView.ImageTransition.crossDissolve(0.5), runImageTransitionIfCached: false){
+					
+					response in
+					// Check if the image isn't already cached
+					if response.response != nil {
+						// Force the cell update
+						
+						
+						imagedCell.contentImageView.image = ImageResize().resizeProfilePhoto(image: response.value!, targetSize: imagedCell.userImageView.frame.size)
+						
+						imagedCell.userImageView.imageFrame()
+						self.duyuruTableView.beginUpdates()
+						self.duyuruTableView.endUpdates()
+						
+					}
+				}
 
                 configureTableView()
                 
@@ -306,7 +327,23 @@ class MainPageViewController: UITableViewController {
                 cell.cellView.layer.shadowOpacity = 0.25
                 cell.cellView.layer.masksToBounds = true;
                 cell.cellView.clipsToBounds = true;
-                
+				
+				cell.userImageView.af_setImage(withURL: URL(string: duyuruArray[indexPath.section].userImgURL)!, placeholderImage: UIImage(named: "profileDefault.png"), filter: nil, imageTransition: UIImageView.ImageTransition.crossDissolve(0.5), runImageTransitionIfCached: false){
+					
+					response in
+					// Check if the image isn't already cached
+					if response.response != nil {
+						// Force the cell update
+						
+						
+						cell.contentImageView.image = ImageResize().resizeProfilePhoto(image: response.value!, targetSize: cell.userImageView.frame.size)
+						
+						cell.userImageView.imageFrame()
+						self.duyuruTableView.beginUpdates()
+						self.duyuruTableView.endUpdates()
+						
+					}
+				}
                 
                 configureTableView()
                 
@@ -368,7 +405,22 @@ class MainPageViewController: UITableViewController {
 //        return 4
 //    }
 //
-    
+	
+	//MARK: - REFRESHING
+	
+	func endRefreshing() {
+		
+		refresher.endRefreshing()
+		if refreshControl?.isRefreshing == true {
+			refreshControl?.endRefreshing()
+		}
+		isRefreshing = false
+		
+		if activity.isAnimating {
+			activity.stopAnimating()
+		}
+	}
+	
     //MARK: - AUTO-RESIZE
     func configureTableView() {
         
@@ -391,10 +443,10 @@ class MainPageViewController: UITableViewController {
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
 
         if isRefreshing != true {
-        duyuruArray.removeAll()
-        isDataFinished = false
-        isRefreshing = true
-        retrieveData(index: duyuruArray.count)
+        	duyuruArray.removeAll()
+        	isDataFinished = false
+        	isRefreshing = true
+        	retrieveData(index: duyuruArray.count)
         }
     }
 
@@ -403,6 +455,7 @@ class MainPageViewController: UITableViewController {
     
 //    func getImage(url: String, imageView: UIImageView, path: Int) {
 //
+//		if imageView.image == nil {
 //
 //        Alamofire.request(url).responseImage { response in
 //            debugPrint(response)
@@ -413,15 +466,13 @@ class MainPageViewController: UITableViewController {
 //            if response.result.isSuccess {
 //
 //                if let image = response.result.value {
-//                    print("image downloaded: \(image)")
 //                    self.duyuruArray[path].isThereImage = true
 //
-//                    let imageHeight = image.size.height
-//                    imageView.frame.size.height = imageHeight
 //
-//                    imageView.image = image
-////                    self.duyuruTableView.beginUpdates()
-////                    self.duyuruTableView.endUpdates()
+//
+//                    imageView.image = self.resizeImage(image: image, targetSize: self.view.bounds.size)
+//                    self.duyuruTableView.beginUpdates()
+//                    self.duyuruTableView.endUpdates()
 //                }
 //            }
 //
@@ -430,19 +481,17 @@ class MainPageViewController: UITableViewController {
 //            }
 //            }
 //        }
+//	}
 
-    
-    
+	
+	
     @IBAction func refreshControl(_ sender: UIRefreshControl) {
         
         if isRefreshing == false {
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 ) {
-                
-                self.refreshSelector()
-                
-            }
 
+			DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+				self.refreshSelector()
+			}
         } else {
             
             refresher.endRefreshing()
@@ -456,6 +505,7 @@ class MainPageViewController: UITableViewController {
         errorLabel.removeFromSuperview()
         alertView.removeFromSuperview()
         duyuruArray.removeAll()
+		duyuruTableView.reloadData()
         
         if duyuruArray.count == 0 {
             isRefreshing = true
@@ -468,7 +518,7 @@ class MainPageViewController: UITableViewController {
     func alertCreate(errorMessage: String) {
         
         if alert.isShowing() == false {
-        if self.duyuruArray.isEmpty == true {
+        if duyuruArray.isEmpty == true {
             
             errorLabel.removeFromSuperview()
             alert.animateAlert(errorMessage: errorMessage, VC: self)

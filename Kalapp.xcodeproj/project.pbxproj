@@ -17,12 +17,13 @@
 		1341ECF720249C8F0013B615 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1341ECF620249C8F0013B615 /* LoginViewController.swift */; };
 		1393F56D20265F910072303B /* UserDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1393F56C20265F910072303B /* UserDetails.swift */; };
 		1393F56F202672E00072303B /* Anket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1393F56E202672E00072303B /* Anket.swift */; };
-		13D7EB5C2021EF3300B4470C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D7EB5B2021EF3300B4470C /* ProfileViewController.swift */; };
+		13D7EB5C2021EF3300B4470C /* ImageSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D7EB5B2021EF3300B4470C /* ImageSelectorController.swift */; };
 		13D7EB5E2021EFAB00B4470C /* AnketlerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D7EB5D2021EFAB00B4470C /* AnketlerViewController.swift */; };
 		13D7EB602021EFB800B4470C /* AnketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D7EB5F2021EFB800B4470C /* AnketViewController.swift */; };
 		13D7EB622021EFC800B4470C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D7EB612021EFC800B4470C /* SettingsViewController.swift */; };
 		13D7EB642021F5ED00B4470C /* Duyuru.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D7EB632021F5ED00B4470C /* Duyuru.swift */; };
 		48016EA520359A20000AC5D1 /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48016EA420359A20000AC5D1 /* Layout.swift */; };
+		4839E477205A3AA100420488 /* PhotoLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4839E476205A3AA100420488 /* PhotoLibrary.swift */; };
 		485DE6802032CDF300D2A401 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485DE67F2032CDF300D2A401 /* Networking.swift */; };
 		BF17E45FCFAD005003FD986D /* Pods_KalappUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FA1582E8012312C825938AF /* Pods_KalappUITests.framework */; };
 		D84C9E987DE5958097F58B42 /* Pods_Kalapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F445673C377B151FEF4DCF7 /* Pods_Kalapp.framework */; };
@@ -50,7 +51,7 @@
 		00798345629C18D3B338AB7C /* Pods-Kalapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kalapp.release.xcconfig"; path = "Pods/Target Support Files/Pods-Kalapp/Pods-Kalapp.release.xcconfig"; sourceTree = "<group>"; };
 		1326D9702020C3A9007BB83A /* Kalapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kalapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1326D9732020C3A9007BB83A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1326D9752020C3A9007BB83A /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
+		1326D9752020C3A9007BB83A /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; usesTabs = 1; };
 		1326D9782020C3A9007BB83A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1326D97A2020C3A9007BB83A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1326D97D2020C3A9007BB83A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -64,12 +65,13 @@
 		1341ECF620249C8F0013B615 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1393F56C20265F910072303B /* UserDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetails.swift; sourceTree = "<group>"; };
 		1393F56E202672E00072303B /* Anket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Anket.swift; sourceTree = "<group>"; };
-		13D7EB5B2021EF3300B4470C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		13D7EB5B2021EF3300B4470C /* ImageSelectorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSelectorController.swift; sourceTree = "<group>"; };
 		13D7EB5D2021EFAB00B4470C /* AnketlerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnketlerViewController.swift; sourceTree = "<group>"; };
 		13D7EB5F2021EFB800B4470C /* AnketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnketViewController.swift; sourceTree = "<group>"; };
 		13D7EB612021EFC800B4470C /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		13D7EB632021F5ED00B4470C /* Duyuru.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Duyuru.swift; sourceTree = "<group>"; };
 		48016EA420359A20000AC5D1 /* Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
+		4839E476205A3AA100420488 /* PhotoLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibrary.swift; sourceTree = "<group>"; };
 		485DE67F2032CDF300D2A401 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		4BDAFC78226F57FD732BB6F2 /* Pods-KalappUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KalappUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KalappUITests/Pods-KalappUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		52C6559EE9E3119000C1BCD9 /* Pods-Kalapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kalapp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kalapp/Pods-Kalapp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -165,7 +167,7 @@
 			children = (
 				1326D9732020C3A9007BB83A /* AppDelegate.swift */,
 				1326D9752020C3A9007BB83A /* MainPageViewController.swift */,
-				13D7EB5B2021EF3300B4470C /* ProfileViewController.swift */,
+				13D7EB5B2021EF3300B4470C /* ImageSelectorController.swift */,
 				13D7EB5D2021EFAB00B4470C /* AnketlerViewController.swift */,
 				13D7EB5F2021EFB800B4470C /* AnketViewController.swift */,
 				13D7EB612021EFC800B4470C /* SettingsViewController.swift */,
@@ -201,6 +203,7 @@
 				1393F56E202672E00072303B /* Anket.swift */,
 				485DE67F2032CDF300D2A401 /* Networking.swift */,
 				48016EA420359A20000AC5D1 /* Layout.swift */,
+				4839E476205A3AA100420488 /* PhotoLibrary.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -540,13 +543,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				1326D9762020C3A9007BB83A /* MainPageViewController.swift in Sources */,
+				4839E477205A3AA100420488 /* PhotoLibrary.swift in Sources */,
 				485DE6802032CDF300D2A401 /* Networking.swift in Sources */,
 				13D7EB622021EFC800B4470C /* SettingsViewController.swift in Sources */,
 				13D7EB602021EFB800B4470C /* AnketViewController.swift in Sources */,
 				13D7EB5E2021EFAB00B4470C /* AnketlerViewController.swift in Sources */,
 				13D7EB642021F5ED00B4470C /* Duyuru.swift in Sources */,
 				1393F56D20265F910072303B /* UserDetails.swift in Sources */,
-				13D7EB5C2021EF3300B4470C /* ProfileViewController.swift in Sources */,
+				13D7EB5C2021EF3300B4470C /* ImageSelectorController.swift in Sources */,
 				1393F56F202672E00072303B /* Anket.swift in Sources */,
 				48016EA520359A20000AC5D1 /* Layout.swift in Sources */,
 				1341ECF720249C8F0013B615 /* LoginViewController.swift in Sources */,
