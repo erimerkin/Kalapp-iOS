@@ -198,10 +198,18 @@ class SettingsViewController: UIViewController {
         
         CameraHandler.shared.showActionSheet(vc: self)
         CameraHandler.shared.imagePickedBlock = { (image) in
-            /* get your image here */
+            func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+                if segue.identifier == "goToCrop" {
+                    
+                    let firstVC = segue.destination as! ImageSelectorViewController
+                    firstVC.imageView.image = image
+                }
+            }
+            
         }
-        
-        
+       performSegue(withIdentifier: "goToCrop", sender: self)
+
+     
     }
     
     

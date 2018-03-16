@@ -24,6 +24,23 @@ class ImageSelectorViewController: UIViewController, UIScrollViewDelegate {
     
     
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var cropAreaView: CropAreaView!
+    
+    var cropArea:CGRect{
+        get{
+            let factor = imageView.image!.size.width/view.frame.width
+            let scale = 1/scrollView.zoomScale
+            let imageFrame = imageView.imageFrame()
+            let x = (scrollView.contentOffset.x + cropAreaView.frame.origin.x - imageFrame.origin.x) * scale * factor
+            let y = (scrollView.contentOffset.y + cropAreaView.frame.origin.y - imageFrame.origin.y) * scale * factor
+            let width = cropAreaView.frame.size.width * scale * factor
+            let height = cropAreaView.frame.size.height * scale * factor
+            return CGRect(x: x, y: y, width: width, height: height)
+        }
+    }
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +58,14 @@ class ImageSelectorViewController: UIViewController, UIScrollViewDelegate {
         return imageView
     }
     
+    
+    @IBAction func crop(_ sender: UIBarButtonItem) {
+        
+        let croppedCGImage = imageView.image?.cgImage?.cropping(to: cropArea)
+        let croppedImage = UIImage(cgImage: croppedCGImage!)
+        imageView.image = croppedImage
+        
+    }
     
     
 
@@ -65,3 +90,14 @@ extension UIImageView{
         }
     }
 }
+
+class CropAreaView: UIView {
+    override func point(inside point: CGPoint, with event:   UIEvent?) -> Bool {
+        return false
+    }
+
+
+
+}
+
+
