@@ -15,16 +15,15 @@
 		1326D9892020C3AA007BB83A /* KalappTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1326D9882020C3AA007BB83A /* KalappTests.swift */; };
 		1326D9942020C3AA007BB83A /* KalappUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1326D9932020C3AA007BB83A /* KalappUITests.swift */; };
 		1341ECF720249C8F0013B615 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1341ECF620249C8F0013B615 /* LoginViewController.swift */; };
-		1393F56D20265F910072303B /* UserDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1393F56C20265F910072303B /* UserDetails.swift */; };
 		1393F56F202672E00072303B /* Anket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1393F56E202672E00072303B /* Anket.swift */; };
-		13D7EB5C2021EF3300B4470C /* ImageSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D7EB5B2021EF3300B4470C /* ImageSelectorController.swift */; };
 		13D7EB5E2021EFAB00B4470C /* AnketlerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D7EB5D2021EFAB00B4470C /* AnketlerViewController.swift */; };
 		13D7EB602021EFB800B4470C /* AnketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D7EB5F2021EFB800B4470C /* AnketViewController.swift */; };
 		13D7EB622021EFC800B4470C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D7EB612021EFC800B4470C /* SettingsViewController.swift */; };
 		13D7EB642021F5ED00B4470C /* Duyuru.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D7EB632021F5ED00B4470C /* Duyuru.swift */; };
 		48016EA520359A20000AC5D1 /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48016EA420359A20000AC5D1 /* Layout.swift */; };
-		4839E477205A3AA100420488 /* PhotoLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4839E476205A3AA100420488 /* PhotoLibrary.swift */; };
 		485DE6802032CDF300D2A401 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485DE67F2032CDF300D2A401 /* Networking.swift */; };
+		ADE25C0B20837C4E008758CC /* ImageResize.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE25C0A20837C4E008758CC /* ImageResize.swift */; };
+		ADE9A050207A3561008DB297 /* ProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE9A04F207A3561008DB297 /* ProfilePage.swift */; };
 		BF17E45FCFAD005003FD986D /* Pods_KalappUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FA1582E8012312C825938AF /* Pods_KalappUITests.framework */; };
 		D84C9E987DE5958097F58B42 /* Pods_Kalapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F445673C377B151FEF4DCF7 /* Pods_Kalapp.framework */; };
 		E2413F2EAF562B47443EBD02 /* Pods_KalappTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93ADDB80498DB4D8F9E51F0A /* Pods_KalappTests.framework */; };
@@ -63,15 +62,12 @@
 		1326D9932020C3AA007BB83A /* KalappUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KalappUITests.swift; sourceTree = "<group>"; };
 		1326D9952020C3AA007BB83A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1341ECF620249C8F0013B615 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		1393F56C20265F910072303B /* UserDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetails.swift; sourceTree = "<group>"; };
 		1393F56E202672E00072303B /* Anket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Anket.swift; sourceTree = "<group>"; };
-		13D7EB5B2021EF3300B4470C /* ImageSelectorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSelectorController.swift; sourceTree = "<group>"; };
 		13D7EB5D2021EFAB00B4470C /* AnketlerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnketlerViewController.swift; sourceTree = "<group>"; };
 		13D7EB5F2021EFB800B4470C /* AnketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnketViewController.swift; sourceTree = "<group>"; };
 		13D7EB612021EFC800B4470C /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		13D7EB632021F5ED00B4470C /* Duyuru.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Duyuru.swift; sourceTree = "<group>"; };
 		48016EA420359A20000AC5D1 /* Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
-		4839E476205A3AA100420488 /* PhotoLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibrary.swift; sourceTree = "<group>"; };
 		485DE67F2032CDF300D2A401 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		4BDAFC78226F57FD732BB6F2 /* Pods-KalappUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KalappUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KalappUITests/Pods-KalappUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		52C6559EE9E3119000C1BCD9 /* Pods-Kalapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kalapp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kalapp/Pods-Kalapp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -79,6 +75,8 @@
 		5FA1582E8012312C825938AF /* Pods_KalappUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KalappUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		69A28D10C54A3A2811DF85DC /* Pods-KalappUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KalappUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-KalappUITests/Pods-KalappUITests.release.xcconfig"; sourceTree = "<group>"; };
 		93ADDB80498DB4D8F9E51F0A /* Pods_KalappTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KalappTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ADE25C0A20837C4E008758CC /* ImageResize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResize.swift; sourceTree = "<group>"; };
+		ADE9A04F207A3561008DB297 /* ProfilePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePage.swift; sourceTree = "<group>"; };
 		C5341F358108093BE9138777 /* Pods-KalappTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KalappTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-KalappTests/Pods-KalappTests.release.xcconfig"; sourceTree = "<group>"; };
 		EF23FBFCEFC30846220F7E85 /* Pods-KalappTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KalappTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KalappTests/Pods-KalappTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -167,7 +165,6 @@
 			children = (
 				1326D9732020C3A9007BB83A /* AppDelegate.swift */,
 				1326D9752020C3A9007BB83A /* MainPageViewController.swift */,
-				13D7EB5B2021EF3300B4470C /* ImageSelectorController.swift */,
 				13D7EB5D2021EFAB00B4470C /* AnketlerViewController.swift */,
 				13D7EB5F2021EFB800B4470C /* AnketViewController.swift */,
 				13D7EB612021EFC800B4470C /* SettingsViewController.swift */,
@@ -199,11 +196,11 @@
 			isa = PBXGroup;
 			children = (
 				13D7EB632021F5ED00B4470C /* Duyuru.swift */,
-				1393F56C20265F910072303B /* UserDetails.swift */,
 				1393F56E202672E00072303B /* Anket.swift */,
 				485DE67F2032CDF300D2A401 /* Networking.swift */,
 				48016EA420359A20000AC5D1 /* Layout.swift */,
-				4839E476205A3AA100420488 /* PhotoLibrary.swift */,
+				ADE9A04F207A3561008DB297 /* ProfilePage.swift */,
+				ADE25C0A20837C4E008758CC /* ImageResize.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -243,7 +240,6 @@
 				1326D96D2020C3A9007BB83A /* Frameworks */,
 				1326D96E2020C3A9007BB83A /* Resources */,
 				38BBBF78217899D6DFF85C80 /* [CP] Embed Pods Frameworks */,
-				F828EFC85510713D7D34A660 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -262,8 +258,6 @@
 				1326D9802020C3AA007BB83A /* Sources */,
 				1326D9812020C3AA007BB83A /* Frameworks */,
 				1326D9822020C3AA007BB83A /* Resources */,
-				07E73ECB5E764C747B690CE6 /* [CP] Embed Pods Frameworks */,
-				98DD05904D7ED9C1B4D9AFE8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -283,8 +277,6 @@
 				1326D98B2020C3AA007BB83A /* Sources */,
 				1326D98C2020C3AA007BB83A /* Frameworks */,
 				1326D98D2020C3AA007BB83A /* Resources */,
-				59BE81B82922CBA4D9B96A2D /* [CP] Embed Pods Frameworks */,
-				EFEE6AD8D515A393A4DDFB14 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -303,7 +295,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "KalÖM";
 				TargetAttributes = {
 					1326D96F2020C3A9007BB83A = {
@@ -370,21 +362,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		07E73ECB5E764C747B690CE6 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KalappTests/Pods-KalappTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		38BBBF78217899D6DFF85C80 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -395,11 +372,10 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
+				"${BUILT_PRODUCTS_DIR}/CropViewController/CropViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
-				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -408,11 +384,10 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChameleonFramework.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CropViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -439,36 +414,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		59BE81B82922CBA4D9B96A2D /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KalappUITests/Pods-KalappUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		98DD05904D7ED9C1B4D9AFE8 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KalappTests/Pods-KalappTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		E4F5BC30976DE53E4A1BAF72 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -485,21 +430,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		EFEE6AD8D515A393A4DDFB14 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KalappUITests/Pods-KalappUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F39C29832CE2446037113607 /* [CP] Check Pods Manifest.lock */ = {
@@ -520,21 +450,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F828EFC85510713D7D34A660 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Kalapp/Pods-Kalapp-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -543,16 +458,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				1326D9762020C3A9007BB83A /* MainPageViewController.swift in Sources */,
-				4839E477205A3AA100420488 /* PhotoLibrary.swift in Sources */,
 				485DE6802032CDF300D2A401 /* Networking.swift in Sources */,
 				13D7EB622021EFC800B4470C /* SettingsViewController.swift in Sources */,
 				13D7EB602021EFB800B4470C /* AnketViewController.swift in Sources */,
 				13D7EB5E2021EFAB00B4470C /* AnketlerViewController.swift in Sources */,
 				13D7EB642021F5ED00B4470C /* Duyuru.swift in Sources */,
-				1393F56D20265F910072303B /* UserDetails.swift in Sources */,
-				13D7EB5C2021EF3300B4470C /* ImageSelectorController.swift in Sources */,
 				1393F56F202672E00072303B /* Anket.swift in Sources */,
+				ADE9A050207A3561008DB297 /* ProfilePage.swift in Sources */,
 				48016EA520359A20000AC5D1 /* Layout.swift in Sources */,
+				ADE25C0B20837C4E008758CC /* ImageResize.swift in Sources */,
 				1341ECF720249C8F0013B615 /* LoginViewController.swift in Sources */,
 				1326D9742020C3A9007BB83A /* AppDelegate.swift in Sources */,
 			);
@@ -623,6 +537,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -630,6 +545,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -680,6 +596,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -687,6 +604,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;

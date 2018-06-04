@@ -12,10 +12,9 @@ target 'Kalapp' do
     pod 'SwiftyJSON'
     pod 'ChameleonFramework'
     pod 'KeychainSwift'
-    pod 'SDWebImage'
     pod 'Firebase'
     pod 'Firebase/Messaging'
-    pod 'NVActivityIndicatorView'
+    pod 'CropViewController'
 
   target 'KalappTests' do
     inherit! :search_paths

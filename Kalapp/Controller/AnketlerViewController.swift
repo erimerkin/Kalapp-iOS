@@ -9,8 +9,8 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
-import SDWebImage
 import ChameleonFramework
+import AlamofireImage
 
 class AnketlerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -18,6 +18,13 @@ class AnketlerViewController: UIViewController, UITableViewDelegate, UITableView
     var params : [String : String] = ["hash" : UserDefaults.standard.string(forKey: "hash")!]
     var currentAnketId = ""
     var currentAnketTitle = ""
+    var activity = UIActivityIndicatorView()
+    
+    //ALERT THINGY
+    
+    let alert = AlertCreation()
+    var backgroundError = UIView()
+    var popupError = UIView()
     
     @IBOutlet weak var anketTableView: UITableView!
     
@@ -26,9 +33,9 @@ class AnketlerViewController: UIViewController, UITableViewDelegate, UITableView
     lazy var refresh: UIRefreshControl = {
         let refresh = UIRefreshControl()
         refresh.addTarget(self, action:
-            #selector(MainPageViewController.handleRefresh(_:)),
+            #selector(handleRefresh(_:)),
                           for: UIControlEvents.valueChanged)
-        refresh.tintColor = UIColor.red
+        refresh.tintColor = UIColor.gray
         
         
         return refresh
@@ -37,6 +44,13 @@ class AnketlerViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        activity.activityIndicatorViewStyle = .whiteLarge
+        activity.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        activity.center = CGPoint(x: self.view.frame.size.width / 2, y: self.view.frame.size.height / 2 - 100)
+        activity.tintColor = .gray
+        
+        self.view.addSubview(activity)
+        activity.startAnimating()
         anketTableView.delegate = self
         anketTableView.dataSource = self
         self.anketTableView.addSubview(self.refresh)
@@ -56,7 +70,7 @@ class AnketlerViewController: UIViewController, UITableViewDelegate, UITableView
         params["s"] = String(index)
         params["f"] = String(index + 5)
         
-        Alamofire.request("http://207.154.249.115/?action=anket&do=anketleri_getir", method: .get, parameters: params).responseJSON { response in
+        Alamofire.request("https://kadikoyanadoluapp.com/?action=anket&do=anketleri_getir", method: .get, parameters: params).responseJSON { response in
             
             if response.result.isSuccess {
                 let anketJSON : JSON = JSON(response.result.value!)
@@ -75,9 +89,7 @@ class AnketlerViewController: UIViewController, UITableViewDelegate, UITableView
                     anket.anketTitle = anketJSON[i]["title"].stringValue
                     anket.anketYazar = anketJSON[i]["yazar"].stringValue
                     
-                    if self.refresh.isRefreshing == true {
-                            self.refresh.endRefreshing()
-                    }
+                   self.stopRefresh()
                      
                         if anket.anketIsVoted == 1 {
                             self.anketArray.insert(anket, at: 0)
@@ -89,15 +101,17 @@ class AnketlerViewController: UIViewController, UITableViewDelegate, UITableView
                     }
                 }
             }
-                else {
-                    print("request is not valid")
+                else {                
                     
+                    self.stopRefresh()
+                    self.error(message: "Verilerin alınmasında bir sıkıntı yaşandı lütfen tekrar deneyin.")
                     
                 }
             }
             else {
                 print("anket get error: \(response.result.error!)")
-                self.refresh.endRefreshing()
+                self.stopRefresh()
+                self.error(message: "Sunuculara bağlanırken bir sıkıntı oluştu.")
                 
             }
         }
@@ -125,23 +139,27 @@ class AnketlerViewController: UIViewController, UITableViewDelegate, UITableView
         
         if anketArray.count != 0 {
         let path = indexPath.row
+        let anket = anketArray[path]
+            
+        let imageFilter = AspectScaledToFillSizeCircleFilter(size: cell.anketImageView.frame.size)
+            
         cell.anketContentView.layer.cornerRadius = 12
         cell.anketContentView.layer.masksToBounds = true
             
-        cell.titleLabel.text = anketArray[path].anketTitle
-//        cell.timeLabel.text = anketArray[indexPath.section].anketDate
-        cell.userLabel.text = anketArray[path].anketYazar
+        cell.titleLabel.text = anket.anketTitle
+        cell.userLabel.text = anket.anketYazar
 
-            cell.anketImageView.layer.cornerRadius = 24
-            cell.anketImageView.layer.masksToBounds = true
-        
+        cell.anketImageView.layer.cornerRadius = 24
+        cell.anketImageView.layer.masksToBounds = true
+        cell.anketImageView.af_setImage(withURL: URL(string: anket.anketImg)!, placeholderImage: nil, filter: imageFilter, imageTransition: UIImageView.ImageTransition.crossDissolve(0.5), runImageTransitionIfCached: false)
 
         
         if anketArray[path].anketIsVoted == 1 {
-            let textColour = #colorLiteral(red: 0.370555222, green: 0.3705646992, blue: 0.3705595732, alpha: 1)
+            let textColour = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.697128081)
+            cell.indicatorLabel.text = "SONUÇLAR"
             cell.titleLabel.textColor = textColour
             cell.userLabel.textColor = textColour
-            cell.anketContentView.backgroundColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 0.6005725599)
+            cell.anketImageView.alpha = 0.7
             cell.shadowView.lowShadow()
         }
         else {
@@ -201,10 +219,6 @@ class AnketlerViewController: UIViewController, UITableViewDelegate, UITableView
             firstVC.postTitle = currentAnketTitle
         }
     }
-    
-    
-
-     
 
     
     //MARK: - HandleRefresh
@@ -212,6 +226,7 @@ class AnketlerViewController: UIViewController, UITableViewDelegate, UITableView
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
         
         anketArray.removeAll()
+        anketTableView.reloadData()
         anketGetir(index: anketArray.count)
         
     }
@@ -219,10 +234,28 @@ class AnketlerViewController: UIViewController, UITableViewDelegate, UITableView
     
     //MARK: - STOP REFRESH
     func stopRefresh() {
-    if self.refresh.isRefreshing == true {
-    self.refresh.endRefreshing()
+        if refresh.isRefreshing == true {
+            refresh.endRefreshing()
+        }
+        if activity.isAnimating == true {
+            activity.stopAnimating()
+        }
     }
+
+    //MARK: - GİVE SOME ERROR BEYBE
+    
+    func error(message: String){
+        if alert.isShowing() == false {
+            if anketArray.isEmpty == true {
+            backgroundError = alert.backgroundError(errorMessage: message, VC: self)
+            self.view.addSubview(backgroundError)
+            }
+            backgroundError.removeFromSuperview()
+            alert.animateAlert(errorMessage: message, VC: self)
+        }
     }
+    
+    //END OF CLASS
 }
 
 class AnketTableViewCell: UITableViewCell {

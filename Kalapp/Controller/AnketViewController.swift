@@ -38,7 +38,7 @@ class AnketViewController: UIViewController, WKUIDelegate {
         
         progressView = UIProgressView(progressViewStyle: .default)
         progressView.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
-        progressView.tintColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+        progressView.tintColor = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)
         navigationController?.navigationBar.addSubview(progressView)
         let navigationBarBounds = self.navigationController?.navigationBar.bounds
         progressView.frame = CGRect(x: 0, y: navigationBarBounds!.size.height - 2, width: navigationBarBounds!.size.width, height: 2)
@@ -56,7 +56,7 @@ class AnketViewController: UIViewController, WKUIDelegate {
         
         self.title = postTitle
                 
-        let myURL = URL(string: "http://207.154.249.115/?action=anket&do=anket_getir&hash=\(loginHash!)&id=\(postId)")
+        let myURL = URL(string: "https://kadikoyanadoluapp.com/?action=anket&do=anket_getir&hash=\(loginHash!)&id=\(postId)")
         let myRequest = URLRequest(url: myURL!)
         webView.load(myRequest)
         webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: &myContext)

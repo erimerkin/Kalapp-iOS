@@ -9,82 +9,178 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
-import ChameleonFramework
+import AlamofireImage
+import CropViewController
+import Photos
 
 protocol SettingsDelegate {
     func reloadPage(result: Bool)
 }
 
-class SettingsViewController: UIViewController {
+
+enum inputType {
+    case email
+    case phone
+    case password
+}
+
+class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CropViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    var params : [String : String] = ["hash" : UserDefaults.standard.string(forKey: "hash")!]
+    var params = ["hash" : UserDefaults.standard.string(forKey: "hash")!]
     var delegate : SettingsDelegate?
     
-    var userName = ""
-    var userPhoto = ""
-    var userClass = ""
-    
-    let userHash = UserDefaults.standard.string(forKey: "hash")
     var i = 0
-    let WEBURL = "http://kadikoyanadoluapp.com"
+    var isThereImage = false
+    let WEBURL = "https://kadikoyanadoluapp.com"
     
     var errorAlert = UIAlertController()
     var action = UIAlertAction()
+    let details = UserDetails()
+    let loading = LoadingView()
+    var loader = UIView()
+    var detailCell = ChangeDetailCell()
+    
+    //MARK: - Image Cropper Variables
+    
+    var imageView = UIImageView()
+    private var image: UIImage?
+    private var croppingStyle = CropViewCroppingStyle.circular
+    
+    private var croppedRect = CGRect.zero
+    private var croppedAngle = 0
+    
     
     //MARK:- Storyboard Outlets
     
-    @IBOutlet weak var userImageView: UIImageView!
-    @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var settingsTableView: UITableView!
     
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var phoneTextField: UITextField!
+
     
-    
-    @IBOutlet weak var oldPassTextField: UITextField!
-    @IBOutlet weak var newPassTextField: UITextField!
-    @IBOutlet weak var passRepeatTextField: UITextField!
-    
-    @IBOutlet weak var userDetailView: UIView!
-    @IBOutlet weak var changeDetailsView: UIView!
-    @IBOutlet weak var logoutView: UIView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
-        
         view.backgroundColor = .flatWhite()
-
-        corners(view: userDetailView)
-        corners(view: changeDetailsView)
-        corners(view: logoutView)
+        getDetails()
+        settingsTableView.delegate = self
+        settingsTableView.dataSource = self
         
     }
 
+    ///////////////////////////////////////////////////////////////////////////
+    // MARK: - TABLEVIEW FUNCTIONS
+    ///////////////////////////////////////////////////////////////////////////
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 3
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let hedefPath = indexPath.section
+        
+        if hedefPath == 0 {
+            let cell = settingsTableView.dequeueReusableCell(withIdentifier: "userDetails") as! UserDetailCell
+            let imageFilter = ScaledToSizeCircleFilter(size: cell.userImageView.frame.size)
+            let name = "\(details.name) \(details.surname)"
+            
+            imageView = cell.userImageView
+            
+            
+            
+            if isThereImage == true {
+            cell.userImageView.af_setImage(withURL: URL(string: details.imgURL)!, placeholderImage: nil, filter: imageFilter, imageTransition:UIImageView.ImageTransition.crossDissolve(0.5), runImageTransitionIfCached: false, completion: nil)
+            }
+
+            cell.userNameLabel.text = name
+            
+            return cell
+            
+        } else if hedefPath ==  1 {
+            detailCell = settingsTableView.dequeueReusableCell(withIdentifier: "details") as! ChangeDetailCell
+            return detailCell
+        
+        } else {
+            let cell = settingsTableView.dequeueReusableCell(withIdentifier: "buttons")!
+            return cell
+        }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 8
+    }
+    
+ 
 
     //MARK: - Change Button Activation
     
     func sendRequest() {
         
-        guard emailTextField.text == "" || emailTextField.text == nil else {
-            changeUserDetails(details: ["email" : emailTextField.text!])
-            return
-        }
-        guard phoneTextField.text == "" || phoneTextField.text == nil else {
-            changeUserDetails(details: ["telefon" : phoneTextField.text!])
-            return
-        }
-        guard (oldPassTextField.text == "" || oldPassTextField.text == nil) || (newPassTextField.text == "" || newPassTextField.text == nil) || (passRepeatTextField.text == "" || passRepeatTextField.text == nil) else {
-            if newPassTextField.text == "" || newPassTextField.text == nil {
-                //pass error ver
-            } else if passRepeatTextField.text == "" || passRepeatTextField.text == nil {
-                //pass error
+        let email = detailCell.emailTextField.text
+        let phone = detailCell.phoneTextField.text
+        let oldPass = detailCell.oldPassTextField.text
+        let newPass = detailCell.newPassTextField.text
+        
+        if email != ""  {
+            print("dolu")
+
+            if validate(content:email!, key: .email) == true {
+                
+                params = ["value" : email!]
+                params = ["key" : "email"]
+                print("true ver")
+                changeUserDetails(details: params)
+                
             } else {
-//                changeUserDetails(details: [String : ])
+            //some error type?
+                print("false ver")
             }
-            return
+            
+        } else {
+            print("empty")
         }
+        
+        if phone != "" {
+//            changeUserDetails(details: ["telefon" : detailCell.phoneTextField.text!])
+            print("wuttafak")
+        }
+        
+    
+
+    }
+    
+    //MARK: - Verification
+    
+    func validate(content:String, key: inputType) -> Bool {
+        
+        switch key {
+            
+        case .email:
+            let emailFormat = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+            let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailFormat)
+            return emailPredicate.evaluate(with: content)
+            
+        case .phone:
+            return false
+            
+        case .password:
+            if content.count >= 6 {
+                return true
+            } else {
+                return false
+            }
+            
+        default:
+            return false
+        }
+        
         
     }
     
@@ -92,24 +188,24 @@ class SettingsViewController: UIViewController {
     
     func getDetails() {
         
-        let params : [String: String] = ["hash" : userHash!]
-        
         Alamofire.request("\(WEBURL)/?action=user_info", method: .get, parameters: params).responseJSON { response in
             
             if response.result.isSuccess {
                 let resultJSON = JSON(response.result.value!)
-                let details = UserDetails()
                 
                 if resultJSON["valid"] == true {
                     
-                    details.name = resultJSON["ad"].stringValue
-                    details.surname = resultJSON["soyad"].stringValue
-                    details.email = resultJSON["email"].stringValue
-                    details.phone = resultJSON["telefon"].stringValue
-                    details.userClass = resultJSON["class"].stringValue
-                    details.profilePhoto = resultJSON["img_url"].stringValue
+                    self.details.name = resultJSON["ad"].stringValue
+                    self.details.surname = resultJSON["soyad"].stringValue
                     
-                    print("true to his words ma lord")
+                    if resultJSON["img_url"].stringValue.isEmpty == true {
+                        self.isThereImage = false
+                    } else {
+                        self.isThereImage = true
+                        self.details.imgURL = resultJSON["img_url"].stringValue
+                    }
+                    
+                    self.settingsTableView.reloadData()
                 }
             }
             else {
@@ -130,14 +226,15 @@ class SettingsViewController: UIViewController {
     func changeUserDetails(details: [String : String]) {
      
       
-        Alamofire.request("\(WEBURL)/?action=update_user", method: .get, parameters: details).responseJSON {
+        Alamofire.request("\(WEBURL)/?action=update_user", method: .get, parameters: details).responseString {
             response in
                 
                 if response.result.isSuccess {
                     print("success for now")
+                    self.navigationController?.popViewController(animated: true)
                 }
                 else {
-                        print("error")
+                        print(response.result.error!)
                     
 //                    self.errorAlert = UIAlertController(title: "Hata", message: "hata", preferredStyle: .alert)
 //
@@ -153,6 +250,26 @@ class SettingsViewController: UIViewController {
             }
         }
     
+    //MARK: - Update Profile Pic
+    
+    func updatePic(code: String) {
+        
+        addLoading()
+
+        Alamofire.request("\(WEBURL)/?action=", method: .get, parameters: params).responseJSON {
+            response in
+            
+            if response.result.isSuccess {
+                
+            } else {
+                
+            }
+            
+        }
+        
+    }
+    
+    
     //MARK: - Logout
     
     func logout() {
@@ -162,25 +279,17 @@ class SettingsViewController: UIViewController {
         defaults.synchronize()
         
     }
-    
-    //MARK: - Change Corners
-    
-    func corners(view: UIView) {
-        
-        view.layer.cornerRadius = 12
-        view.layer.masksToBounds = true
-        
-    }
+
     
     //MARK: - Buttons
 
     @IBAction func completedButtonPressed(_ sender: UIBarButtonItem) {
-//        sendRequest()
+        sendRequest()
 //        navigationController?.popViewController(animated: true)
 //        self.delegate?.reloadPage(result: true)
 //        self.view.addSubview(LoadingView().load())
-        self.view.addSubview(LoadingView().showActivityIndicatory(uiView: self.view))
         
+        addLoading()
         
     }
     
@@ -191,26 +300,90 @@ class SettingsViewController: UIViewController {
     @IBAction func logoutButtonPressed(_ sender: UIButton) {
         logout()
         dismiss(animated: true, completion: nil)
-        performSegue(withIdentifier: "unwindToLogin", sender: self)
+        performSegue(withIdentifier: "logoutSegue", sender: self)
     }
     
     @IBAction func changePhotoButtonPressed(_ sender: UIButton) {
         
-        CameraHandler.shared.showActionSheet(vc: self)
-        CameraHandler.shared.imagePickedBlock = { (image) in
-            func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-                if segue.identifier == "goToCrop" {
-                    
-                    let firstVC = segue.destination as! ImageSelectorViewController
-                    firstVC.imageView.image = image
-                }
-            }
-            
+        let profileAction = UIAlertAction(title: "Kütüphaneden Seç", style: .default) { (action) in
+            self.croppingStyle = .circular
+            let imagePicker = UIImagePickerController()
+            imagePicker.modalPresentationStyle = .popover
+            imagePicker.preferredContentSize = CGSize(width: 320, height: 568)
+            imagePicker.sourceType = .photoLibrary
+            imagePicker.allowsEditing = false
+            imagePicker.delegate = self
+            self.present(imagePicker, animated: true, completion: nil)
         }
-       performSegue(withIdentifier: "goToCrop", sender: self)
-
+        
+        let alertController = UIAlertController()
+        
+        alertController.addAction(profileAction)
+        alertController.modalPresentationStyle = .popover
+        
+        present(alertController, animated: true, completion: nil)
      
     }
     
+
+    
+    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        guard let image = (info[UIImagePickerControllerOriginalImage] as? UIImage) else { return }
+        
+        let cropController = CropViewController(croppingStyle: croppingStyle, image: image)
+        cropController.delegate = self
+        
+        cropController.doneButtonTitle = "Kaydet"
+        cropController.cancelButtonTitle = "İptal"
+        
+        self.image = image
+        
+        picker.pushViewController(cropController, animated: true)
+        
+    }
+    
+    public func cropViewController(_ cropViewController: CropViewController, didCropToCircularImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
+        self.croppedRect = cropRect
+        self.croppedAngle = angle
+        updateImageViewWithImage(image, fromCropViewController: cropViewController)
+    }
+    
+    public func updateImageViewWithImage(_ image: UIImage, fromCropViewController cropViewController: CropViewController) {
+        
+        let imageData : Data =  UIImagePNGRepresentation(image)!
+        let strBase64 = imageData.base64EncodedString(options: .lineLength64Characters)
+        addLoading()
+        imageView.image = image
+        cropViewController.dismiss(animated: true, completion: nil)
+        
+    }
+    
+    
+    func addLoading() {
+        
+        loader = loading.showActivityIndicatory(uiView: self.view)
+        self.view.addSubview(loader)
+        
+    }
+    
+    
+
     
 }
+
+class UserDetailCell: UITableViewCell {
+    
+    @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var userImageView: UIImageView!
+}
+
+class ChangeDetailCell: UITableViewCell {
+    
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var phoneTextField: UITextField!
+    @IBOutlet weak var oldPassTextField: UITextField!
+    @IBOutlet weak var newPassTextField: UITextField!
+    @IBOutlet weak var repeatPassTextField: UITextField!
+    
+}
+

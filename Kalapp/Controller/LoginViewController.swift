@@ -11,7 +11,6 @@ import Alamofire
 import ChameleonFramework
 import SwiftyJSON
 import KeychainSwift
-import NVActivityIndicatorView
 
 extension UIViewController
 {
@@ -26,20 +25,20 @@ extension UIViewController
     
     @objc func dismissKeyboard()
     {
+        self.navigationController?.isNavigationBarHidden = false
         view.endEditing(true)
     }
 }
 
 
-class LoginViewController: UIViewController, NVActivityIndicatorViewable{
+class LoginViewController: UIViewController{
 
     let keychain = KeychainSwift(keyPrefix: "user_")
     let defaults = UserDefaults.standard
     var loginHash = ""
     var errorAlert = UIAlertController()
     var action = UIAlertAction()
-    let borderBir = CALayer()
-    var borderIki = CALayer()
+    var loading = UIView()
 
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var okulNoTextField: UITextField!
@@ -55,37 +54,23 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable{
         loginButton.layer.cornerRadius = 5
         loginButton.layer.masksToBounds = true
         
-        // Do any additional setup after loading the view.
-//        okulNoTextField.layer.addSublayer(borderBir)
-//        sifreTextField.layer.addSublayer(borderIki)
-//    
-//        updateBorder(border: borderBir, textField: okulNoTextField, color: UIColor.white, width: 2.0)
-//        updateBorder(border: borderIki, textField: sifreTextField, color: UIColor.white, width: 2.0)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    func updateBorder(border: CALayer, textField: UITextField, color: UIColor, width: CGFloat){
-        border.backgroundColor = color.cgColor
-        border.frame = CGRect(x: 0.0, y: textField.frame.size.height - width, width: textField.frame.size.width, height: width);
-    }
 
-    
     //TODO: - Login
     
     func login(okulNo: String, password: String) {
         
-        startAnimating(CGSize(width: 200, height: 40), message: "Yükleniyor", type: NVActivityIndicatorType.ballRotateChase, color: UIColor.flatGreenColorDark())
+        loading = LoadingView().showActivityIndicatory(uiView: self.view)
+        
+        self.view.addSubview(loading)
         
         var loginCred : [String: String] = [:]
         loginCred["okul_no"] = "\(okulNo)"
         loginCred["pass"] = password
         loginCred["fcms_token"] = "1"
         
-        Alamofire.request("http://207.154.249.115/?action=login", method: .get, parameters: loginCred).responseJSON {
+        Alamofire.request("https://kadikoyanadoluapp.com/?action=login", method: .get, parameters: loginCred).responseJSON {
             response in
             if response.result.isSuccess {
                 
@@ -96,15 +81,8 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable{
                 
                 if error == "true" {
                    
-                    self.errorAlert = UIAlertController(title: "Hata", message: loginJSON["message"].stringValue, preferredStyle: .alert)
+                    self.alert(baslik: "Hata", message: loginJSON["message"].stringValue)
                     
-                    self.action = UIAlertAction(title: "Tamam", style: .default, handler: nil)
-                    
-                    self.errorAlert.addAction(self.action)
-                    
-                    self.stopAnimating()
-                    
-                    self.present(self.errorAlert, animated: true, completion: nil)
                 }
                     
                 else {
@@ -123,44 +101,24 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable{
                     
                     if self.defaults.string(forKey: "hash") == self.loginHash {
                         
-                        self.stopAnimating()
+                        self.loading.removeFromSuperview()
                         self.goToMainPage()
                     
-                        }
-                        
-                        
-                    else {
-                        print("error")
-                        self.errorAlert = UIAlertController(title: "Hata", message: "verilerde sıkıntı yaşandı lütfen tekrar deneyin", preferredStyle: .alert)
-                        
-                        self.action = UIAlertAction(title: "Tamam", style: .default, handler: nil)
-                        
-                        self.errorAlert.addAction(self.action)
-                        
-                        
-                        self.stopAnimating()
+                    } else {
 
-                        self.present(self.errorAlert, animated: true, completion: nil)
+                        self.alert(baslik: "Hata", message: "Sunucudan alınan verilerde sıkıntı yaşandı, lütfen tekrar giriş yapınız")
                         
                         }
                     
-                    
-
-                    
+                  
                 }
             
             }
             else {
                 print("Error: \(String(describing: response.result.error))")
-                self.errorAlert = UIAlertController(title: "Hata", message: "connection problems", preferredStyle: .alert)
                 
-                self.action = UIAlertAction(title: "Tamam", style: .default, handler: nil)
+                self.alert(baslik: "Hata", message: "Sunuculara olan bağlantıda sıkıntı yaşandı, lütfen bağlantınızı kontrol edin.")
                 
-                self.errorAlert.addAction(self.action)
-
-                self.stopAnimating()
-                
-                self.present(self.errorAlert, animated: true, completion: nil)
                 }
         }
     }
@@ -168,29 +126,13 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable{
     //TODO: - BUTON
     
     @IBAction func buttonPressed(_ sender: UIButton) {
+
+        next()
         
-        if okulNoTextField.text != "" && sifreTextField.text != ""{
-            login(okulNo: "\(okulNoTextField.text!)", password: sifreTextField.text!)
-        }
-        else {
-            print("error")
-            self.errorAlert = UIAlertController(title: "Hata", message: "Lütfen bütün alanları doldurunuz", preferredStyle: .alert)
-            
-            self.action = UIAlertAction(title: "Tamam", style: .default, handler: nil)
-            
-            self.errorAlert.addAction(self.action)
-            
-            self.present(self.errorAlert, animated: true, completion: nil)
-        }
     }
     
     @IBAction func userPressedGo(_ sender: UITextField) {
-        if okulNoTextField.text != "" && sifreTextField.text != ""{
-            login(okulNo: "\(okulNoTextField.text!)", password: sifreTextField.text!)
-        }
-        else {
-            print("error")
-        }
+        next()
     }
     
     
@@ -209,9 +151,31 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable{
         }
     }
 
-    //MARK: - CallLogin
+    //MARK: - Go
     
+    func next() {
+        if okulNoTextField.text != "" && sifreTextField.text != ""{
+            login(okulNo: "\(okulNoTextField.text!)", password: sifreTextField.text!)
+        }
+        else {
+            alert(baslik: "Hata", message: "Lütfen okul numaranız ve şifrenizi eksiksiz doldurunuz.")
+        }
+    }
     
+    //MARK: - Error
+    
+    func alert(baslik: String, message: String) {
+        
+        loading.removeFromSuperview()
+        
+        errorAlert = UIAlertController(title: baslik, message: message, preferredStyle: .alert)
+        
+        action = UIAlertAction(title: "Tamam", style: .default, handler: nil)
+        
+        errorAlert.addAction(self.action)
+        
+        present(self.errorAlert, animated: true, completion: nil)
+    }
     
 
     // MARK: - Navigation

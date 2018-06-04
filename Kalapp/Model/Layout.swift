@@ -41,8 +41,10 @@ class ErrorLabel: UILabel {
         
     func initializeLabel(content: String) {
         
-            self.bounds = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width - 24, height: 48)
-            self.center = CGPoint(x: UIScreen.main.bounds.size.width / 2, y: 80)
+            let bounds = UIScreen.main.bounds.size
+        
+            self.bounds = CGRect(x: 0, y: 0, width: bounds.width - 24, height: 48)
+            self.center = CGPoint(x: bounds.width / 2, y: bounds.height / 2 )
             self.text = content
             self.font = UIFont(name: "Helvetica", size: 17.0)
             self.textAlignment = .center
@@ -145,18 +147,23 @@ class AlertCreation {
     }
     
     //MARK: - ALERTCONTROLLER CREATION
-    func popupAlert(errorMessage: String, button: String, VC: UIViewController, completion: Any?) {
+    func popupAlert(errorMessage: String, button: String, VC: UIViewController, completion: Any?) -> UIAlertController {
         
         let errorAlert = UIAlertController(title: "Hata", message: errorMessage, preferredStyle: .alert)
         
-        let action = UIAlertAction(title: button, style: .default) { action in
-            completion
+        let action = UIAlertAction(title: button, style: .default) { (action) in
+            if let activity = completion {
+            activity
+            }
         }
+        
+        let cancelAction = UIAlertAction(title: "İptal", style: .cancel, handler: nil)
         
         
         errorAlert.addAction(action)
+        errorAlert.addAction(cancelAction)
         
-        VC.present(errorAlert, animated: true, completion: nil)
+        return errorAlert
         
     }
     
@@ -166,42 +173,6 @@ class LoadingView {
     
     let screenSize = UIScreen.main.bounds.size
     
-    
-    //EKRANA DOKUNULMASINI ENGELLE
-//    func load() -> UIView{
-//
-//        let backView = UIView()
-//        backView.frame = CGRect(x: 0, y: 0, width: screenSize.width, height: screenSize.height)
-//        backView.backgroundColor = .none
-//
-//    //LOADING INDICATORU YOLLA GELSİN LOL
-//
-//        let sex = UIView()
-//        sex.frame = CGRect(x: 0, y: 0, width: screenSize.width / 2, height: 100)
-//        sex.layer.cornerRadius = 15
-//        sex.layer.masksToBounds = true
-//        sex.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 0.6963827055)
-//        sex.center = CGPoint(x: screenSize.width / 2 , y: screenSize.height / 2)
-//
-//        let indicator = activity(view: sex)
-//
-//        sex.addSubview(indicator)
-//        backView.addSubview(sex)
-//        indicator.startAnimating()
-//
-//        return backView
-//    }
-//
-//    func activity(view: UIView) -> UIActivityIndicatorView {
-//        let activity = UIActivityIndicatorView()
-//        activity.center = CGPoint(x: view.frame.size.width / 2, y: view.frame.size.height / 2)
-//        activity.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-//        activity.activityIndicatorViewStyle = .whiteLarge
-//
-//        return activity
-//
-//    }
-    
     func showActivityIndicatory(uiView: UIView) -> UIView {
         let container: UIView = UIView()
         container.frame = CGRect(x: 0, y: 0, width: screenSize.width, height: screenSize.height)
@@ -209,7 +180,7 @@ class LoadingView {
         
         let loadingView: UIView = UIView()
         loadingView.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
-        loadingView.center = CGPoint(x: screenSize.width / 2, y: screenSize.height / 2 - 100)
+        loadingView.center = CGPoint(x: screenSize.width / 2, y: screenSize.height / 2)
         loadingView.backgroundColor = #colorLiteral(red: 0.1861208975, green: 0.3144840002, blue: 0.1993199885, alpha: 0.7030447346)
         loadingView.clipsToBounds = true
         loadingView.layer.cornerRadius = 10
@@ -231,52 +202,3 @@ class LoadingView {
     
 }
 
-class ImageResize {
-    
-    func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
-        let size = image.size
-        
-        let widthRatio  = targetSize.width  / size.width
-        
-       
-        let newSize = CGSize(width: size.width * widthRatio,  height: size.height * widthRatio)
-
-        
-        // This is the rect that we've calculated out and this is what is actually used below
-        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
-        
-        // Actually do the resizing to the rect using the ImageContext stuff
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
-        image.draw(in: rect)
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return newImage!
-    }
-    
-    func resizeProfilePhoto(image: UIImage, targetSize: CGSize) -> UIImage {
-        let size = image.size
-        
-        let widthRatio = targetSize.width / size.width
-        let heigthRatio = targetSize.height / size.height
-        
-        var newSize : CGSize
-        
-        if widthRatio > heigthRatio {
-            newSize = CGSize(width: size.width * heigthRatio, height: size.height * heigthRatio)
-        }
-        else {
-            newSize = CGSize(width: size.width * widthRatio, height: size.height * widthRatio)
-        }
-        
-        let rect = CGRect(x:0, y:0, width: newSize.width, height: newSize.height)
-        
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
-        image.draw(in: rect)
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return newImage!
-        
-    }
-}

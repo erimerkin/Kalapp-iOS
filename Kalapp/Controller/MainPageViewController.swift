@@ -10,7 +10,6 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import KeychainSwift
-import SDWebImage
 import AlamofireImage
 
 
@@ -18,7 +17,7 @@ import AlamofireImage
 class MainPageViewController: UITableViewController {
 
     @IBOutlet weak var duyuruTableView: UITableView!
-    @IBOutlet weak var refresher: UIRefreshControl!
+	@IBOutlet weak var refresher: UIRefreshControl! 
     
     //DETAILS FOR CONNECTION
     var duyuruArray = [Duyuru]()
@@ -26,8 +25,8 @@ class MainPageViewController: UITableViewController {
     let keychain = KeychainSwift(keyPrefix: "user_")
     var userHash = ""
     var hashHash = ""
-	let adress = "http://kadikoyanadoluapp.com"
-    
+	let adress = "https://kadikoyanadoluapp.com"
+
     
     //CHECKING VALUES
     var isDataFinished = false
@@ -37,12 +36,11 @@ class MainPageViewController: UITableViewController {
     var isShowingError = false
     
     //INIT
-    var errorAlert = UIAlertController()
-    var action = UIAlertAction()
     var alert = AlertCreation()
     var alertView = ErrorPopup()
     var errorLabel = ErrorLabel()
     let activity = UIActivityIndicatorView()
+	let bounds = UIScreen.main.bounds.size
         
     //MARK: - Pull-to-Refresh
 
@@ -62,8 +60,9 @@ class MainPageViewController: UITableViewController {
         
         
         activity.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-        activity.activityIndicatorViewStyle = .gray
-        activity.center = CGPoint(x: self.view.frame.size.width / 2, y: self.view.frame.size.height / 2 - 100)
+        activity.activityIndicatorViewStyle = .whiteLarge
+        activity.center = CGPoint(x: bounds.width / 2, y: bounds.height / 2)
+		activity.tintColor = .gray
         self.view.addSubview(activity)
         activity.startAnimating()
        
@@ -143,13 +142,12 @@ class MainPageViewController: UITableViewController {
                                     duyuru.isThereImage = true
                                 }
                                 
-                                self.duyuruArray.append(duyuru)
+                                	self.duyuruArray.append(duyuru)
 
                                     print("data received successfully")
                                     
                                     self.duyuruTableView.reloadData()
 									self.endRefreshing()
-
 								
                             }
                                 
@@ -170,20 +168,31 @@ class MainPageViewController: UITableViewController {
 							Alamofire.request("\(self.adress)/?action=duyuru", method: .get, parameters: params).responseString  { stringResponse in
                                 if stringResponse.result.isSuccess {
                                     if stringResponse.result.value! == "You are not allowed to access this page!" {
-										
-										print("hash")
+
 										self.endRefreshing()
+		
+					                	let errorAlert = UIAlertController(title: "Hata", message: "connection error", preferredStyle: .alert)
+										let action = UIAlertAction(title: "Giriş Yap", style: .default , handler: { (action) in
+											
+											self.goToLogin()
+											
+											return;
+										})
 										
-                                        self.alert.popupAlert(errorMessage: "Oturumunuzda bir sorun oluştu, devam etmek için lütfen giriş yapın.", button: "Giriş Yap", VC: self.self, completion: self.goToLogin())
-                                        
+										let cancel = UIAlertAction(title: "İptal", style: .cancel, handler: nil)
+										
+										errorAlert.addAction(action)
+										errorAlert.addAction(cancel)
+										
+										self.present(errorAlert, animated: true, completion: nil)
+		
                                         }
                                     }
                         //ERROR HASHLA ALAKALI DEĞİL(CONNECTION VS.)
                                 else {
                                     print(stringResponse.result.error!)
 
-									print("fatih")
-									
+								
 									self.endRefreshing()
 									
                                     self.alertCreate(errorMessage: "Sunuculara bağlanmada sorun yaşandı.")
@@ -204,13 +213,7 @@ class MainPageViewController: UITableViewController {
             
 				endRefreshing()
 			
-//                self.errorAlert = UIAlertController(title: "Hata", message: "connection error", preferredStyle: .alert)
-//
-//                self.action = UIAlertAction(title: "Tamam", style: .default, handler: nil)
-//
-//                self.errorAlert.addAction(self.action)
-//
-//                self.present(self.errorAlert, animated: true, completion: nil)
+
             
             alertCreate(errorMessage: "Bağlantı yok, lütfen internet bağlantınızı açın.")
 
@@ -225,9 +228,11 @@ class MainPageViewController: UITableViewController {
     
     //TODO: - CELL SPAWN
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+		
+		let row = indexPath.section
+		
         //CHECK IF IT IS LAST ROW
-        if indexPath.section == duyuruArray.count - 1 && isRefreshing == false { retrieveData(index: duyuruArray.count)}
+        if row == duyuruArray.count - 1 && isRefreshing == false { retrieveData(index: duyuruArray.count)}
         
         let titleColor = UIColor.flatForestGreenColorDark()
         let userColor = UIColor.flatForestGreen()
@@ -237,19 +242,18 @@ class MainPageViewController: UITableViewController {
 
             
             //CHECK IF THE CELL SHOULD HAVE A IMAGE
-            print("test: \(indexPath.section)")
-            if duyuruArray[indexPath.section].contentImg != "nil" && duyuruArray[indexPath.section].isThereImage == true {
+
+            if duyuruArray[row].contentImg != "nil" && duyuruArray[indexPath.section].isThereImage == true {
                 
                 let imagedCell = duyuruTableView.dequeueReusableCell(withIdentifier: "customDuyuruTableViewCell", for: indexPath) as! DuyuruTableViewCell
                 
                 imagedCell.userNameLabel.textColor = userColor
                 imagedCell.titleLabel.textColor = titleColor
                 
-                imagedCell.userNameLabel.text = duyuruArray[indexPath.section].userName
-                // cell.contentDate.text = duyuruArray[indexPath.section].postDate
-                imagedCell.titleLabel.text = duyuruArray[indexPath.section].postTitle
-                imagedCell.contentLabel.text = duyuruArray[indexPath.section].postTitle
-                
+                imagedCell.userNameLabel.text = duyuruArray[row].userName
+                imagedCell.titleLabel.text = duyuruArray[row].postTitle
+                imagedCell.contentLabel.text = duyuruArray[row].postText
+                imagedCell.timeLabel.text = duyuruArray[row].postDate
                 
                 imagedCell.userImageView.layer.cornerRadius = 24
                 imagedCell.userImageView.layer.masksToBounds = true
@@ -257,32 +261,28 @@ class MainPageViewController: UITableViewController {
                 imagedCell.cellView.layer.cornerRadius = 12
                 imagedCell.cellView.layer.masksToBounds = true
                 
-//
-//                getImage(url: duyuruArray[indexPath.section].contentImg, imageView: imagedCell.contentImageView, path: indexPath.section)
 				
-				imagedCell.contentImageView.af_setImage(withURL: URL(string: duyuruArray[indexPath.section].contentImg)!, placeholderImage: UIImage(named: "profileDefault.png"), filter: nil, imageTransition: UIImageView.ImageTransition.crossDissolve(0.5), runImageTransitionIfCached: false){
+				imagedCell.contentImageView.af_setImage(withURL: URL(string: duyuruArray[row].contentImg)!, placeholderImage: nil, filter: nil, imageTransition: UIImageView.ImageTransition.crossDissolve(0.5), runImageTransitionIfCached: false){
 
                         response in
                             // Check if the image isn't already cached
                             if response.response != nil {
                                 // Force the cell update
-								
-								
+
 								imagedCell.contentImageView.image = ImageResize().resizeImage(image: response.value!, targetSize: self.self.view.bounds.size)
-						
+
 								self.duyuruTableView.beginUpdates()
 								self.duyuruTableView.endUpdates()
-								
+
 								let imageHeight = imagedCell.contentImageView.image?.size.height
-								
+
 								imagedCell.contentImageView.frame.size.height = imageHeight!
-								
 
 
                         }
                     }
 				
-				imagedCell.userImageView.af_setImage(withURL: URL(string: duyuruArray[indexPath.section].userImgURL)!, placeholderImage: UIImage(named: "profileDefault.png"), filter: nil, imageTransition: UIImageView.ImageTransition.crossDissolve(0.5), runImageTransitionIfCached: false){
+				imagedCell.userImageView.af_setImage(withURL: URL(string: duyuruArray[row].userImgURL)!, placeholderImage: nil, filter: nil, imageTransition: UIImageView.ImageTransition.crossDissolve(0.5), runImageTransitionIfCached: false){
 					
 					response in
 					// Check if the image isn't already cached
@@ -292,7 +292,6 @@ class MainPageViewController: UITableViewController {
 						
 						imagedCell.contentImageView.image = ImageResize().resizeProfilePhoto(image: response.value!, targetSize: imagedCell.userImageView.frame.size)
 						
-						imagedCell.userImageView.imageFrame()
 						self.duyuruTableView.beginUpdates()
 						self.duyuruTableView.endUpdates()
 						
@@ -309,10 +308,10 @@ class MainPageViewController: UITableViewController {
                 cell.userNameLabel.textColor = userColor
                 cell.titleLabel.textColor = titleColor
                 
-                cell.userNameLabel.text = duyuruArray[indexPath.section].userName
-                // cell.contentDate.text = duyuruArray[indexPath.section].postDate
-                cell.titleLabel.text = duyuruArray[indexPath.section].postTitle
-                cell.contentLabel.text = duyuruArray[indexPath.section].postTitle
+                cell.userNameLabel.text = duyuruArray[row].userName
+                cell.timeLabel.text = duyuruArray[row].postDate
+                cell.titleLabel.text = duyuruArray[row].postTitle
+                cell.contentLabel.text = duyuruArray[row].postText
             
                 
                 cell.userImageView.layer.cornerRadius = 24
@@ -328,7 +327,7 @@ class MainPageViewController: UITableViewController {
                 cell.cellView.layer.masksToBounds = true;
                 cell.cellView.clipsToBounds = true;
 				
-				cell.userImageView.af_setImage(withURL: URL(string: duyuruArray[indexPath.section].userImgURL)!, placeholderImage: UIImage(named: "profileDefault.png"), filter: nil, imageTransition: UIImageView.ImageTransition.crossDissolve(0.5), runImageTransitionIfCached: false){
+				cell.userImageView.af_setImage(withURL: URL(string: duyuruArray[row].userImgURL)!, placeholderImage: UIImage(named: "profileDefault.png"), filter: nil, imageTransition: UIImageView.ImageTransition.crossDissolve(0.5), runImageTransitionIfCached: false){
 					
 					response in
 					// Check if the image isn't already cached
@@ -338,7 +337,6 @@ class MainPageViewController: UITableViewController {
 						
 						cell.contentImageView.image = ImageResize().resizeProfilePhoto(image: response.value!, targetSize: cell.userImageView.frame.size)
 						
-						cell.userImageView.imageFrame()
 						self.duyuruTableView.beginUpdates()
 						self.duyuruTableView.endUpdates()
 						
@@ -383,28 +381,9 @@ class MainPageViewController: UITableViewController {
         return 1
     }
     
-//    //MARK: - FOOTER CREATION AND SPECS
-//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//        
-//        let view:UIView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: self.view.bounds.size.width, height: 4))
-//        view.backgroundColor = .white
-//        
-//        return view
-//    }
-    
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        let view:UIView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: self.view.bounds.size.width, height: 2))
-//        view.backgroundColor = .white
-//        
-//        return view
-//    }
-    
-    
-//    //MARK: - FOOTER HEIGHT
-//    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-//        return 4
-//    }
-//
+	//*
+	/////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	
 	//MARK: - REFRESHING
 	
@@ -425,7 +404,7 @@ class MainPageViewController: UITableViewController {
     func configureTableView() {
         
         duyuruTableView.rowHeight = UITableViewAutomaticDimension
-
+		duyuruTableView.estimatedRowHeight = 350
     }
     
     
@@ -438,68 +417,18 @@ class MainPageViewController: UITableViewController {
         performSegue(withIdentifier: "goToLogin", sender: self)
     }
 
-    //MARK: - REFRESH FUNCTION
-    
-    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
-
-        if isRefreshing != true {
-        	duyuruArray.removeAll()
-        	isDataFinished = false
-        	isRefreshing = true
-        	retrieveData(index: duyuruArray.count)
-        }
-    }
-
-    
-    //MARK: - Image
-    
-//    func getImage(url: String, imageView: UIImageView, path: Int) {
-//
-//		if imageView.image == nil {
-//
-//        Alamofire.request(url).responseImage { response in
-//            debugPrint(response)
-//
-//            print(response.request)
-//            print(response.response)
-//            debugPrint(response.result)
-//            if response.result.isSuccess {
-//
-//                if let image = response.result.value {
-//                    self.duyuruArray[path].isThereImage = true
-//
-//
-//
-//                    imageView.image = self.resizeImage(image: image, targetSize: self.view.bounds.size)
-//                    self.duyuruTableView.beginUpdates()
-//                    self.duyuruTableView.endUpdates()
-//                }
-//            }
-//
-//            else {
-//                print(response.result.error!)
-//            }
-//            }
-//        }
-//	}
-
-	
+	//MARK: - Refresh
 	
     @IBAction func refreshControl(_ sender: UIRefreshControl) {
         
         if isRefreshing == false {
+			
+			refresher.endRefreshing()
+			refreshSelector()
 
-			DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-				self.refreshSelector()
-			}
-        } else {
-            
-            refresher.endRefreshing()
-        
-        }
-        
-    }
-    
+    	}
+	}
+		
     func refreshSelector() {
         
         errorLabel.removeFromSuperview()
@@ -518,18 +447,18 @@ class MainPageViewController: UITableViewController {
     func alertCreate(errorMessage: String) {
         
         if alert.isShowing() == false {
+			
+			alert.animateAlert(errorMessage: errorMessage, VC: self)
+			errorLabel.removeFromSuperview()
+			
         if duyuruArray.isEmpty == true {
             
-            errorLabel.removeFromSuperview()
-            alert.animateAlert(errorMessage: errorMessage, VC: self)
             errorLabel = alert.backgroundError(errorMessage: errorMessage, VC: self)
+			self.view.addSubview(errorLabel)
 
-        } else {
-            
-            errorLabel.removeFromSuperview()
-            alert.animateAlert(errorMessage: errorMessage, VC: self)
-            
-            }
+        }
+
+
         }
             
     }
@@ -552,8 +481,8 @@ class DuyuruTableViewCell : UITableViewCell {
     @IBOutlet weak var cellView: UIView!
     @IBOutlet weak var contentImageView: UIImageView!
     @IBOutlet weak var shadowLayer: ShadowView!
-
-    
+	@IBOutlet weak var timeLabel: UILabel!
+	
 }
 
 
